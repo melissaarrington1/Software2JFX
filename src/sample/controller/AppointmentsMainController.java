@@ -32,11 +32,28 @@ public class AppointmentsMainController implements Initializable {
 
     }
 
+//    @FXML
+//    void onActionCreateAppointment(ActionEvent event) throws IOException {
+//        System.out.println("create appointment button clicked");
+//        stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+//        scene = FXMLLoader.load(getClass().getResource("/sample/views/New_Appointment.fxml"));
+//        stage.setScene(new Scene(scene));
+//        stage.show();
+//    }
     @FXML
-    void onActionNewAppointment(ActionEvent event) throws IOException {
+    void onActionCreateAppointment(ActionEvent event) throws IOException {
         System.out.println("create appointment button clicked");
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/sample/views/New_Appointment.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
+    }
+
+    @FXML
+    void onActionCreateCustomer(ActionEvent event) throws IOException {
+        System.out.println("create customer button clicked");
+        stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/sample/views/New_Customer.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }

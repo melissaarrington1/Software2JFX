@@ -27,4 +27,20 @@ public class NewAppointmentController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+
+
+    public void onActionCreateAppointment(ActionEvent actionEvent) {
+    }
+
+    public void onActionCreateCustomer(ActionEvent actionEvent) {
+    }
+
+    public void OnActionCreateCustomer(ActionEvent actionEvent) {
+    }
+
+    public void onActionModifyCustomer(ActionEvent actionEvent) {
+    }
+
+    public void onActionDeleteCustomer(ActionEvent actionEvent) {
+    }
 }

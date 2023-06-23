@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<TabPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.NewCustomerController">
+    <tabs>
+        <Tab text="Customers" closable="false">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="382.0" prefWidth="697.0">
+                    <children>
+                        <TableView layoutX="11.0" layoutY="21.0" prefHeight="200.0" prefWidth="854.0">
+                            <columns>
+                                <TableColumn prefWidth="85.0" text="Customer ID" />
+                                <TableColumn prefWidth="132.0" text="Customer Name" />
+                                <TableColumn prefWidth="159.0" text="Address" />
+                                <TableColumn prefWidth="73.0" text="Postal Code" />
+                                <TableColumn prefWidth="101.0" text="Phone Number" />
+                                <TableColumn prefWidth="99.0" text="Created Date" />
+                                <TableColumn minWidth="0.0" prefWidth="107.0" text="Created By" />
+                                <TableColumn minWidth="0.0" prefWidth="97.0" text="State Province" />
+                            </columns>
+                        </TableView>
+                        <Button layoutX="106.0" layoutY="249.0" mnemonicParsing="false" onAction="#OnActionCreateCustomer" text="Create Customer" />
+                        <Button layoutX="353.0" layoutY="249.0" mnemonicParsing="false" onAction="#onActionModifyCustomer" text="Modify Customer" />
+                        <Button layoutX="635.0" layoutY="249.0" mnemonicParsing="false" onAction="#onActionDeleteCustomer" text="Delete Customer" />
+                    </children>
+                </AnchorPane>
+            </content>
+        </Tab>
+    </tabs>
+
+</TabPane>
