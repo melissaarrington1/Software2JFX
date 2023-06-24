@@ -15,21 +15,21 @@
             </font>
         </Label>
 
-        <Label fx:id="" layoutX="56.0" layoutY="153.0" text="Customer ID" />
+        <Label layoutX="56.0" layoutY="153.0" text="Customer ID" />
         <Label layoutX="54.0" layoutY="192.0" text="Customer Name" />
         <Label layoutX="57.0" layoutY="226.0" text="Address" />
         <Label layoutX="53.0" layoutY="291.0" text="Postal Code" />
         <Label layoutX="58.0" layoutY="250.0" text="Phone Number" />
         <Label fx:id="addPartSharedMachineCompany" layoutX="53.0" layoutY="330.0" text="Countries" />
         <TextField fx:id="addPartIDField" disable="true" editable="false" layoutX="190.0" layoutY="149.0" />
-        <TextField fx:id="addPartNameField" layoutX="189.0" layoutY="188.0" prefHeight="25.0" prefWidth="265.0" />
-        <TextField fx:id="addPartInvField" layoutX="189.0" layoutY="222.0" prefHeight="25.0" prefWidth="265.0" />
-        <TextField fx:id="addPartPriceField" layoutX="189.0" layoutY="261.0" prefHeight="25.0" prefWidth="265.0" />
-        <TextField fx:id="addPartMaxField" layoutX="189.0" layoutY="296.0" prefHeight="25.0" prefWidth="265.0" />
-        <ChoiceBox layoutX="189.0" layoutY="335.0" prefHeight="25.0" prefWidth="265.0" />
+        <TextField fx:id="customerNameField" layoutX="189.0" layoutY="188.0" prefHeight="25.0" prefWidth="265.0" />
+        <TextField fx:id="customerAddressField" layoutX="189.0" layoutY="222.0" prefHeight="25.0" prefWidth="265.0" />
+        <TextField fx:id="customerPhoneNumberField" layoutX="189.0" layoutY="261.0" prefHeight="25.0" prefWidth="265.0" />
+        <TextField fx:id="customerPostalCodeField" layoutX="189.0" layoutY="296.0" prefHeight="25.0" prefWidth="265.0" />
+        <ChoiceBox fx:id="customerCountryCombo" layoutX="189.0" layoutY="335.0" prefHeight="25.0" prefWidth="265.0" />
         <Button layoutX="202.0" layoutY="483.0" mnemonicParsing="false" text="Save Customer" />
         <Button layoutX="453.0" layoutY="483.0" mnemonicParsing="false" onAction="#onActionCancel" text="Cancel" />
-      <ChoiceBox layoutX="190.0" layoutY="379.0" prefHeight="25.0" prefWidth="265.0" />
+      <ChoiceBox fx:id="customerDivisionCombo" layoutX="190.0" layoutY="379.0" prefHeight="25.0" prefWidth="265.0" />
       <Label fx:id="addPartSharedMachineCompany1" layoutX="60.0" layoutY="383.0" text="Divisions" />
 
     </children>
