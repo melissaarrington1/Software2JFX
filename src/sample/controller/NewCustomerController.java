@@ -37,7 +37,7 @@ public class NewCustomerController implements Initializable {
     @FXML
     private ComboBox customerDivisionCombo;
     @FXML
-    private ComboBox customerCountryCombo;
+    private ComboBox<Country> customerCountryCombo;
 
 
     /** Cancels without creating a customer and sends back to main screen

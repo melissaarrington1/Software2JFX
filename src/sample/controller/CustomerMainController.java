@@ -11,6 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import sample.DB.CustomerQuery;
 import sample.model.Customer;
 import sample.model.Appointment;
 
@@ -41,6 +42,12 @@ public class CustomerMainController implements Initializable {
     @FXML
     private TableColumn<Customer, Integer> customerStateCol;
 
+    /***
+     * Event that takes you to the Add Customer screen.
+     *
+     * @param event
+     * @throws IOException
+     */
     public void onActionCreateCustomer(ActionEvent event) throws IOException {
         System.out.println("lets create a new customer button clicked");
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
@@ -55,9 +62,14 @@ public class CustomerMainController implements Initializable {
     public void onActionDeleteCustomer(ActionEvent actionEvent) {
     }
 
+    /**
+     *  Method to Initialize the list of customers on the main customer screen
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //mainCustomerTable.setItems();
+        mainCustomerTable.setItems(CustomerQuery.getCustomerList());
         customerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         customerNameCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         customerAddressCol.setCellValueFactory(new PropertyValueFactory<>("customerAddress"));
@@ -67,4 +79,6 @@ public class CustomerMainController implements Initializable {
         customerCreatedByCol.setCellValueFactory(new PropertyValueFactory<>("customerCreatedBy"));
         customerStateCol.setCellValueFactory(new PropertyValueFactory<>("customerState"));
     }
+
+
 }

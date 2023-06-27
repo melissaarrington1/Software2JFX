@@ -30,7 +30,7 @@ public class Main extends Application {
 
     public static void main(String[] args) throws SQLException {
         JDBC.makeConnection();
-        //launch(args);
+        launch(args);
         LocalDateTime cDate = LocalDateTime.now();
         Timestamp uDate = Timestamp.valueOf(LocalDateTime.now());
         int rowsAffected = CustomerQuery.insert("dad", "yankee", "33333", "4044444444", cDate, uDate, 12);
