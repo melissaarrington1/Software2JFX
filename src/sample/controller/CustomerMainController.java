@@ -20,6 +20,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CustomerMainController implements Initializable {
+    public TableColumn customerCountryCol;
     Stage stage;
     Parent scene;
 
@@ -70,14 +71,14 @@ public class CustomerMainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         mainCustomerTable.setItems(CustomerQuery.getCustomerList());
-        customerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerID"));
-        customerNameCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
-        customerAddressCol.setCellValueFactory(new PropertyValueFactory<>("customerAddress"));
-        customerPostalCodeCol.setCellValueFactory(new PropertyValueFactory<>("customerPostalCode"));
-        customerPhoneCol.setCellValueFactory(new PropertyValueFactory<>("customerPhone"));
-        customerCreatedDateCol.setCellValueFactory(new PropertyValueFactory<>("customerCreatedDate"));
-        customerCreatedByCol.setCellValueFactory(new PropertyValueFactory<>("customerCreatedBy"));
-        customerStateCol.setCellValueFactory(new PropertyValueFactory<>("customerState"));
+        customerIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        customerNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        customerAddressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
+        customerPostalCodeCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+        customerPhoneCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        //customerCreatedDateCol.setCellValueFactory(new PropertyValueFactory<>("createDate"));
+        //customerCreatedByCol.setCellValueFactory(new PropertyValueFactory<>("createdBy"));
+        //customerStateCol.setCellValueFactory(new PropertyValueFactory<>("customerState"));
     }
 
 

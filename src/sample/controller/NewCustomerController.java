@@ -10,6 +10,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import sample.DB.CountryQuery;
+import sample.DB.DivisionQuery;
+import sample.model.Country;
 
 import java.io.IOException;
 import java.net.URL;
@@ -52,17 +55,35 @@ public class NewCustomerController implements Initializable {
         stage.show();
     }
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        customerCountryCombo.setItems(CountryQuery.getCountryList());
     }
 
 
     public void onActionSaveCustomer(ActionEvent event) throws IOException {
+        try {
+            String customerName = customerNameField.getText();
+            String customerAddress = customerAddressField.getText();
+            String customerPhoneNumber = customerPhoneNumberField.getText();
+            String customerPostalCode = customerPostalCodeField.getText();
+            //String customerCountry = customerCountryCombo.getValue();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         System.out.println("new customer saved clicked");
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/sample/views/Appointments_Main.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
+    }
+
+    public void onActionCountryChange(ActionEvent actionEvent) {
+        Country country = customerCountryCombo.getValue();
+        customerDivisionCombo.setItems(DivisionQuery.getCountryDivisions(country.getCountryId()));
     }
 }

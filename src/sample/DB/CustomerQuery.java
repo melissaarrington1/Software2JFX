@@ -30,6 +30,7 @@ public class CustomerQuery {
                 String customerCountryName = rs.getString("Country");
                 Customer c = new Customer(customerName, customerAddress, customerPostalCode, customerPhone, createdBy, lastUpdatedBy, customerDivisionId, customerDivisionName, customerCountryId, customerCountryName, customerId);
                 customerList.add(c);
+                System.out.println("*");
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -25,21 +25,22 @@ public class Main extends Application {
         primaryStage.setTitle("Appointment Management");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
+        primaryStage.centerOnScreen();
     }
 
 
     public static void main(String[] args) throws SQLException {
         JDBC.makeConnection();
         launch(args);
-        LocalDateTime cDate = LocalDateTime.now();
-        Timestamp uDate = Timestamp.valueOf(LocalDateTime.now());
-        int rowsAffected = CustomerQuery.insert("dad", "yankee", "33333", "4044444444", cDate, uDate, 12);
-        if(rowsAffected > 0) {
-            System.out.println("Insert successful");
-        }
-        else {
-            System.out.println("Insert Failed!");
-        }
+//        LocalDateTime cDate = LocalDateTime.now();
+//        Timestamp uDate = Timestamp.valueOf(LocalDateTime.now());
+//        int rowsAffected = CustomerQuery.insert("dad", "yankee", "33333", "4044444444", cDate, uDate, 12);
+//        if(rowsAffected > 0) {
+//            System.out.println("Insert successful");
+//        }
+//        else {
+//            System.out.println("Insert Failed!");
+//        }
         JDBC.closeConnection();
 //        ResourceBundle rb = ResourceBundle.getBundle("/resources/Nat", Locale.getDefault());
 //
