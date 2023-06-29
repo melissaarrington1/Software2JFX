@@ -1,10 +1,19 @@
 package sample.model;
 
+/**
+ * Division Model Class
+ */
 public class Division {
     int divisionId;
     String divisionName;
     int countryId;
 
+    /**
+     * Division Constructor
+     * @param divisionId
+     * @param divisionName
+     * @param countryId
+     */
     public Division(int divisionId, String divisionName, int countryId) {
         this.divisionId = divisionId;
         this.divisionName = divisionName;

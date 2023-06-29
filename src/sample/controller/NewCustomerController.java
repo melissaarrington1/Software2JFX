@@ -11,8 +11,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sample.DB.CountryQuery;
+import sample.DB.CustomerQuery;
 import sample.DB.DivisionQuery;
 import sample.model.Country;
+import sample.model.Division;
 
 import java.io.IOException;
 import java.net.URL;
@@ -38,7 +40,7 @@ public class NewCustomerController implements Initializable {
     @FXML
     private TextField customerPostalCodeField;
     @FXML
-    private ComboBox customerDivisionCombo;
+    private ComboBox<Division> customerDivisionCombo;
     @FXML
     private ComboBox<Country> customerCountryCombo;
 
@@ -68,14 +70,18 @@ public class NewCustomerController implements Initializable {
             String customerAddress = customerAddressField.getText();
             String customerPhoneNumber = customerPhoneNumberField.getText();
             String customerPostalCode = customerPostalCodeField.getText();
-            //String customerCountry = customerCountryCombo.getValue();
+            Country customerCountry = customerCountryCombo.getValue();
+            Division customerDivision = customerDivisionCombo.getValue();
+            CustomerQuery.addCustomer(customerName, customerAddress, customerPostalCode, customerPhoneNumber, customerCountry, customerDivision);
+            System.out.println("cool");
 
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println(e);
         }
 
 
-        System.out.println("new customer saved clicked");
+        //System.out.println("new customer saved clicked");
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/sample/views/Appointments_Main.fxml"));
         stage.setScene(new Scene(scene));

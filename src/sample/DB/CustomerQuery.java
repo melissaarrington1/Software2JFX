@@ -3,7 +3,9 @@ package sample.DB;
 import com.mysql.cj.x.protobuf.MysqlxPrepare;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import sample.model.Country;
 import sample.model.Customer;
+import sample.model.Division;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -40,29 +42,57 @@ public class CustomerQuery {
 
     /**
      * This is SQL Query to insert a NEW customer into the Customers Table in the database
-     * @param customer
-     * @param address
-     * @param postalCode
-     * @param phone
-     * @param createDate
-     * @param lastUpdate
-     * @param divisionID
+     * @param customerName
+     * @param customerAddress
+     * @param customerPostalCode
+     * @param customerPhoneNumber
+     * @param customerCountry
+     * @param
      * @return
      * @throws SQLException
      */
-    public static int insert(String customer, String address, String postalCode, String phone, LocalDateTime createDate, Timestamp lastUpdate, int divisionID) throws SQLException {
-        String sql = "INSERT INTO CUSTOMERS (Customer_Name, Address, Postal_Code, Phone, Create_Date, Last_Update, Division_ID) VALUES(?, ?, ?, ?, ?, ?, ?)";
+
+//    public static void addCustomer(String customerName, String customerAddress, String customerPostalCode, String customerPhoneNumber, String createDate, Timestamp lastUpdate, Country customerCountry, int divisionID) throws SQLException {
+////        String sql = "INSERT INTO CUSTOMERS (Customer_Name, Address, Postal_Code, Phone, Create_Date, Last_Update, Division_ID) VALUES(?, ?, ?, ?, ?, ?, ?)";
+////        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+////        ps.setString(1, customerName);
+////        ps.setString(2, customerAddress);
+////        ps.setString(3, customerPostalCode);
+////        ps.setString(4, customerPhoneNumber);
+////        ps.setTimestamp(5, Timestamp.valueOf(createDate));
+////        ps.setTimestamp(6, lastUpdate);
+////        ps.setString(5, String.valueOf(customerCountry));
+////        ps.setInt(6, divisionID);
+////        int rowsAffected = ps.executeUpdate();
+////                if(rowsAffected > 0) {
+////            System.out.println("Insert successful");
+////        }
+////        else {
+////            System.out.println("Insert Failed!");
+////        //return rowsAffected;
+////        }
+
+
+    public static void addCustomer(String customerName, String customerAddress, String customerPostalCode, String customerPhoneNumber, Country customerCountry, Division customerDivision) throws SQLException {
+//JOIN first_level_divisions ON customers.Division_ID = first_level_divisions.Division_ID JOIN countries ON countries.Country_ID = first_level_divisions.Country_ID
+        String sql = "INSERT INTO CUSTOMERS (Customer_Name, Address, Postal_Code, Phone, Country, Division) VALUES (?, ?, ?, ?, ?, ?)" +
+                "";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
-        ps.setString(1, customer);
-        ps.setString(2, address);
-        ps.setString(3, postalCode);
-        ps.setString(4, phone);
-        ps.setTimestamp(5, Timestamp.valueOf(createDate));
-        ps.setTimestamp(6, lastUpdate);
-        ps.setInt(7, divisionID);
-        int rowsAffected = ps.executeUpdate();
-        return rowsAffected;
+        ps.setString(1, customerName);
+        ps.setString(2, customerAddress);
+        ps.setString(3, customerPostalCode);
+        ps.setString(4, customerPhoneNumber);
+        //ps.setTimestamp(5, Timestamp.valueOf(createDate));
+        //ps.setTimestamp(6, lastUpdate);
+        ps.setString(5, String.valueOf(customerCountry));
+        ps.setString(6, String.valueOf(customerDivision));
+        ps.executeUpdate();
+//        if(rowsAffected > 0) {
+//            System.out.println("Insert successful");
+//        }
+//        else {
+//            System.out.println("Insert Failed!");
+//            return rowsAffected;
+//        }
     }
-
-
 }
