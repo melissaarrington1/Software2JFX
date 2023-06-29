@@ -37,6 +37,7 @@ public class DivisionQuery {
     }
 
 
+    //Lambda Function
     //getCountryDivisions or (add where clause & pass countryID to filter divisionList by countryID)
     // do the same except reuse the method above Lambda expression
     public static ObservableList<Division> getCountryDivisions(int countryId) {
