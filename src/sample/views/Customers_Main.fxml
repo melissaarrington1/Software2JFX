@@ -13,7 +13,7 @@
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="407.0" prefWidth="818.0">
                     <children>
-                        <TableView fx:id="mainCustomerTable" layoutX="11.0" layoutY="21.0" prefHeight="200.0" prefWidth="854.0">
+                        <TableView fx:id="mainCustomerTable" layoutX="68.0" layoutY="31.0" prefHeight="200.0" prefWidth="745.0">
                             <columns>
                                 <TableColumn fx:id="customerIdCol" prefWidth="85.0" text="Customer ID" />
                                 <TableColumn fx:id="customerNameCol" prefWidth="132.0" text="Customer Name" />
@@ -24,9 +24,9 @@
                                 <TableColumn fx:id="customerStateCol" minWidth="0.0" prefWidth="97.0" text="State Province" />
                             </columns>
                         </TableView>
-                        <Button layoutX="106.0" layoutY="249.0" mnemonicParsing="false" onAction="#onActionCreateCustomer" text="Create Customer" />
-                        <Button layoutX="353.0" layoutY="249.0" mnemonicParsing="false" onAction="#onActionModifyCustomer" text="Modify Customer" />
-                        <Button layoutX="635.0" layoutY="249.0" mnemonicParsing="false" onAction="#onActionDeleteCustomer" text="Delete Customer" />
+                        <Button layoutX="115.0" layoutY="249.0" mnemonicParsing="false" onAction="#onActionCreateCustomer" text="Create Customer" />
+                        <Button layoutX="387.0" layoutY="249.0" mnemonicParsing="false" onAction="#onActionModifyCustomer" text="Modify Customer" />
+                        <Button layoutX="655.0" layoutY="249.0" mnemonicParsing="false" onAction="#onActionDeleteCustomer" text="Delete Customer" />
                     </children>
                 </AnchorPane>
             </content>

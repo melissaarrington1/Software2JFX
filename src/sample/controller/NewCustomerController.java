@@ -71,7 +71,7 @@ public class NewCustomerController implements Initializable {
             String customerPhoneNumber = customerPhoneNumberField.getText();
             String customerPostalCode = customerPostalCodeField.getText();
             Country customerCountry = customerCountryCombo.getValue();
-            Division customerDivision = customerDivisionCombo.getValue();
+            int customerDivision = customerDivisionCombo.getValue().getDivisionId();
             CustomerQuery.addCustomer(customerName, customerAddress, customerPostalCode, customerPhoneNumber, customerCountry, customerDivision);
             System.out.println("cool");
 

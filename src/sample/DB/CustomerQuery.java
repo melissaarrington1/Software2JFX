@@ -73,9 +73,9 @@ public class CustomerQuery {
 ////        }
 
 
-    public static void addCustomer(String customerName, String customerAddress, String customerPostalCode, String customerPhoneNumber, Country customerCountry, Division customerDivision) throws SQLException {
+    public static void addCustomer(String customerName, String customerAddress, String customerPostalCode, String customerPhoneNumber, Country customerCountry, int customerDivision) throws SQLException {
 //JOIN first_level_divisions ON customers.Division_ID = first_level_divisions.Division_ID JOIN countries ON countries.Country_ID = first_level_divisions.Country_ID
-        String sql = "INSERT INTO CUSTOMERS (Customer_Name, Address, Postal_Code, Phone, Country, Division) VALUES (?, ?, ?, ?, ?, ?)" +
+        String sql = "INSERT INTO CUSTOMERS (Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES (?, ?, ?, ?, ?)" +
                 "";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
         ps.setString(1, customerName);
@@ -84,8 +84,7 @@ public class CustomerQuery {
         ps.setString(4, customerPhoneNumber);
         //ps.setTimestamp(5, Timestamp.valueOf(createDate));
         //ps.setTimestamp(6, lastUpdate);
-        ps.setString(5, String.valueOf(customerCountry));
-        ps.setString(6, String.valueOf(customerDivision));
+        ps.setInt(5, customerDivision);
         ps.executeUpdate();
 //        if(rowsAffected > 0) {
 //            System.out.println("Insert successful");
