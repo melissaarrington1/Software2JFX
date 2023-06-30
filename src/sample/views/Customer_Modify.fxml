@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="543.0" prefWidth="653.0" style="-fx-background-color: #edf5ee;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.CustomerModifyController">
+    <children>
+        <Label layoutX="255.0" layoutY="88.0" text="Modify Customer">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
+
+        <Label layoutX="56.0" layoutY="153.0" text="Customer ID" />
+        <Label layoutX="54.0" layoutY="192.0" text="Customer Name" />
+        <Label layoutX="57.0" layoutY="226.0" text="Address" />
+        <Label layoutX="53.0" layoutY="291.0" text="Postal Code" />
+        <Label layoutX="58.0" layoutY="250.0" text="Phone Number" />
+        <Label layoutX="53.0" layoutY="330.0" text="Countries" />
+        <TextField fx:id="customerIDField" disable="true" editable="false" layoutX="190.0" layoutY="149.0" promptText="Auto Generated" />
+        <TextField fx:id="customerNameField" layoutX="189.0" layoutY="188.0" prefHeight="25.0" prefWidth="265.0" />
+        <TextField fx:id="customerAddressField" layoutX="189.0" layoutY="222.0" prefHeight="25.0" prefWidth="265.0" />
+        <TextField fx:id="customerPhoneNumberField" layoutX="189.0" layoutY="261.0" prefHeight="25.0" prefWidth="265.0" />
+        <TextField fx:id="customerPostalCodeField" layoutX="189.0" layoutY="296.0" prefHeight="25.0" prefWidth="265.0" />
+        <ComboBox fx:id="customerCountryCombo" layoutX="189.0" layoutY="335.0" onAction="#onActionCountryChange" prefHeight="25.0" prefWidth="265.0" />
+        <Button layoutX="202.0" layoutY="483.0" mnemonicParsing="false" onAction="#onActionSaveCustomer" text="Save Customer" />
+        <Button layoutX="453.0" layoutY="483.0" mnemonicParsing="false" onAction="#onActionCancel" text="Cancel" />
+        <ComboBox fx:id="customerDivisionCombo" layoutX="190.0" layoutY="379.0" prefHeight="25.0" prefWidth="265.0" />
+        <Label layoutX="60.0" layoutY="383.0" text="Divisions" />
+
+    </children>
+
+</AnchorPane>

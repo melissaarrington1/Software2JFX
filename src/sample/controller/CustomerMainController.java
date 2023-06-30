@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -57,10 +58,33 @@ public class CustomerMainController implements Initializable {
         stage.show();
     }
 
-    public void onActionModifyCustomer(ActionEvent actionEvent) {
-    }
+    public void onActionModifyCustomer(ActionEvent event) throws IOException {
+        if(mainCustomerTable.getSelectionModel().getSelectedItem() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please select a customer to modify.");
+            alert.showAndWait();
+        }
+        else {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/sample/views/Customer_Modify.fxml"));
+            loader.load();
+            CustomerModifyController CMController = loader.getController();
+            CMController.customerInfo(mainCustomerTable.getSelectionModel().getSelectedItem());
+            stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/sample/views/Customer_Modify.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+            }
+        }
+
 
     public void onActionDeleteCustomer(ActionEvent actionEvent) {
+        Customer customer = mainCustomerTable.getSelectionModel().getSelectedItem();
+
+        if(customer == null) {
+            Alert deleteAlert = new Alert(Alert.AlertType.ERROR, "Please select a customer to delete!");
+            deleteAlert.show();
+            return;
+        }
     }
 
     /**
@@ -77,7 +101,6 @@ public class CustomerMainController implements Initializable {
         customerPostalCodeCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
         customerPhoneCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         customerCountryCol.setCellValueFactory(new PropertyValueFactory<>("countries"));
-        //customerCreatedByCol.setCellValueFactory(new PropertyValueFactory<>("createdBy"));
         customerStateCol.setCellValueFactory(new PropertyValueFactory<>("division"));
     }
 
