@@ -18,6 +18,7 @@ import sample.model.Appointment;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class CustomerMainController implements Initializable {
@@ -26,7 +27,7 @@ public class CustomerMainController implements Initializable {
     Parent scene;
 
     @FXML
-    private TableView<Customer> mainCustomerTable;
+    private TableView<Customer> mainCustomerTable = new TableView<>();
     @FXML
     private TableColumn<Customer, Integer> customerIdCol;
     @FXML
@@ -44,6 +45,45 @@ public class CustomerMainController implements Initializable {
     @FXML
     private TableColumn<Customer, Integer> customerStateCol;
 
+    /**
+     * Button for Modifying Customers. Redirects to the CustomerModify page when clicked.
+     * If there is no customer selected, a Warning Error will occur.
+     * @param event
+     * @throws IOException
+     */
+    public void onActionModifyCustomer(ActionEvent event) throws SQLException, IOException {
+
+        System.out.println(mainCustomerTable.getSelectionModel().getSelectedItem().getClass().getName());
+        Customer selectedCustomer = (Customer) mainCustomerTable.getSelectionModel().getSelectedItem();
+        int selectedIndex = mainCustomerTable.getSelectionModel().getSelectedIndex();
+
+        //CMController.customerInfo(); = mainCustomerTable.getSelectionModel().getSelectedItem();
+        if(selectedCustomer == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please select a customer to modify.");
+            alert.showAndWait();
+        }
+        if(selectedCustomer != null) {
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/sample/views/Customer_Modify.fxml"));
+
+            loader.load();
+
+            Stage stage1= (Stage) ((Button)event.getSource()).getScene().getWindow();
+            Parent root = loader.getRoot();
+
+            //scene = FXMLLoader.load(getClass().getResource("/sample/views/Customer_Modify.fxml"));
+
+            CustomerModifyController CMController = loader.getController();
+            System.out.println(selectedCustomer.getName());
+            CMController.customerInfo(selectedCustomer, selectedIndex);
+
+            stage1.setScene(new Scene(root));
+            stage1.show();
+        }
+    }
+
+
     /***
      * Event that takes you to the Add Customer screen.
      *
@@ -58,23 +98,7 @@ public class CustomerMainController implements Initializable {
         stage.show();
     }
 
-    public void onActionModifyCustomer(ActionEvent event) throws IOException {
-        if(mainCustomerTable.getSelectionModel().getSelectedItem() == null) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Please select a customer to modify.");
-            alert.showAndWait();
-        }
-        else {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/sample/views/Customer_Modify.fxml"));
-            loader.load();
-            CustomerModifyController CMController = loader.getController();
-            CMController.customerInfo(mainCustomerTable.getSelectionModel().getSelectedItem());
-            stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-            scene = FXMLLoader.load(getClass().getResource("/sample/views/Customer_Modify.fxml"));
-            stage.setScene(new Scene(scene));
-            stage.show();
-            }
-        }
+
 
 
     public void onActionDeleteCustomer(ActionEvent actionEvent) {
@@ -102,6 +126,8 @@ public class CustomerMainController implements Initializable {
         customerPhoneCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         customerCountryCol.setCellValueFactory(new PropertyValueFactory<>("countries"));
         customerStateCol.setCellValueFactory(new PropertyValueFactory<>("division"));
+
+
     }
 
 

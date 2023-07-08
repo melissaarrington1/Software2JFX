@@ -41,9 +41,7 @@ public class Customer {
         this.postalCode = postalCode;
         this.countries = countries;
         this.division = division;
-        this.createDate = createDate;
         this.createdBy = createdBy;
-        this.lastUpdate = lastUpdate;
         this.lastUpdatedBy = lastUpdatedBy;
         this.divisionID = divisionID;
         this.countryId = countryId;

@@ -3,6 +3,7 @@ package sample.DB;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import sample.model.Country;
+import sample.model.Division;
 
 
 import java.sql.PreparedStatement;
@@ -34,5 +35,14 @@ public class CountryQuery {
             e.printStackTrace();
         }
         return countryList;
+    }
+
+    public static Country findById(int countryId) {
+        for(Country c:getCountryList()) {
+            if(c.getCountryId() == countryId) {
+                return c;
+            }
+        }
+        return null;
     }
 }

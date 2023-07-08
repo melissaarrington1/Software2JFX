@@ -17,6 +17,7 @@ public class DivisionQuery {
             String sql = "SELECT * FROM First_Level_Divisions";
             PreparedStatement ps = JDBC.connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
+
             while (rs.next()) {
                 int divisionId = rs.getInt("Division_ID");
                 int countryId = rs.getInt("Country_ID");
@@ -40,6 +41,12 @@ public class DivisionQuery {
     //Lambda Function
     //getCountryDivisions or (add where clause & pass countryID to filter divisionList by countryID)
     // do the same except reuse the method above Lambda expression
+
+    /**
+     * Lambda Function for Associated country and Division by the country ID
+     * @param countryId
+     * @return
+     */
     public static ObservableList<Division> getCountryDivisions(int countryId) {
         ObservableList<Division> divisionList = getDivisionList().stream()
                 .filter(d -> d.getCountryId() == countryId)
@@ -48,5 +55,21 @@ public class DivisionQuery {
 
     }
 
+    public static Division findById(int divisionId) {
+        for(Division d:getDivisionList()) {
+            if(d.getDivisionId() == divisionId) {
+                return d;
+            }
+        }
+        return null;
+    }
 
+    public static Country findCountry(int divisionId) {
+        for(Division d:getDivisionList()) {
+            if(d.getDivisionId() == divisionId) {
+                return CountryQuery.findById(d.getCountryId());
+            }
+        }
+        return null;
+    }
 }

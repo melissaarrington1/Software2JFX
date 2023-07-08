@@ -52,25 +52,7 @@ public class CustomerQuery {
      * @throws SQLException
      */
 
-//    public static void addCustomer(String customerName, String customerAddress, String customerPostalCode, String customerPhoneNumber, String createDate, Timestamp lastUpdate, Country customerCountry, int divisionID) throws SQLException {
-////        String sql = "INSERT INTO CUSTOMERS (Customer_Name, Address, Postal_Code, Phone, Create_Date, Last_Update, Division_ID) VALUES(?, ?, ?, ?, ?, ?, ?)";
-////        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
-////        ps.setString(1, customerName);
-////        ps.setString(2, customerAddress);
-////        ps.setString(3, customerPostalCode);
-////        ps.setString(4, customerPhoneNumber);
-////        ps.setTimestamp(5, Timestamp.valueOf(createDate));
-////        ps.setTimestamp(6, lastUpdate);
-////        ps.setString(5, String.valueOf(customerCountry));
-////        ps.setInt(6, divisionID);
-////        int rowsAffected = ps.executeUpdate();
-////                if(rowsAffected > 0) {
-////            System.out.println("Insert successful");
-////        }
-////        else {
-////            System.out.println("Insert Failed!");
-////        //return rowsAffected;
-////        }
+
 
 
     public static void addCustomer(String customerName, String customerAddress, String customerPostalCode, String customerPhoneNumber, Country customerCountry, int customerDivision) throws SQLException {
@@ -93,5 +75,32 @@ public class CustomerQuery {
 //            System.out.println("Insert Failed!");
 //            return rowsAffected;
 //        }
+    }
+
+    public static void updateCustomer(String customerName, String customerAddress, int customerPostalCode, String customerPhone, int customerDivisionId, String customerDivisionName, int customerCountryId, String customerCountryName, int customerId) {
+        try {
+            String sql = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?,  Division_ID = ? WHERE Customer_ID = ?";
+            PreparedStatement updateCustomer = JDBC.connection.prepareStatement(sql);
+            updateCustomer.setString(1, customerName);
+            updateCustomer.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateCustomer(String customerName, String customerAddress, String customerPostalCode, String customerPhone, int customerCountry, int customerDivision) {
+        try {
+            String sql = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?,  Division_ID = ? WHERE Customer_ID = ?";
+            PreparedStatement updateCustomer = JDBC.connection.prepareStatement(sql);
+            updateCustomer.setString(1, customerName);
+            updateCustomer.setString(2, customerAddress);
+            updateCustomer.setString(3, customerPostalCode);
+            updateCustomer.setString(4, customerPhone);
+            updateCustomer.setInt(5, customerCountry);
+            updateCustomer.setInt(6, customerDivision);
+            updateCustomer.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
