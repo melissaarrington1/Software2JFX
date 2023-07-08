@@ -88,7 +88,7 @@ public class CustomerQuery {
         }
     }
 
-    public static void updateCustomer(String customerName, String customerAddress, String customerPostalCode, String customerPhone, int customerCountry, int customerDivision) {
+    public static void updateCustomer(String customerName, String customerAddress, String customerPostalCode, String customerPhone, int customerDivision, int customerId) {
         try {
             String sql = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?,  Division_ID = ? WHERE Customer_ID = ?";
             PreparedStatement updateCustomer = JDBC.connection.prepareStatement(sql);
@@ -96,8 +96,8 @@ public class CustomerQuery {
             updateCustomer.setString(2, customerAddress);
             updateCustomer.setString(3, customerPostalCode);
             updateCustomer.setString(4, customerPhone);
-            updateCustomer.setInt(5, customerCountry);
-            updateCustomer.setInt(6, customerDivision);
+            updateCustomer.setInt(5, customerDivision);
+            updateCustomer.setInt(6, customerId);
             updateCustomer.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

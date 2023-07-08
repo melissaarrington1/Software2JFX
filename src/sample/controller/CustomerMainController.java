@@ -53,11 +53,8 @@ public class CustomerMainController implements Initializable {
      */
     public void onActionModifyCustomer(ActionEvent event) throws SQLException, IOException {
 
-        System.out.println(mainCustomerTable.getSelectionModel().getSelectedItem().getClass().getName());
         Customer selectedCustomer = (Customer) mainCustomerTable.getSelectionModel().getSelectedItem();
-        int selectedIndex = mainCustomerTable.getSelectionModel().getSelectedIndex();
 
-        //CMController.customerInfo(); = mainCustomerTable.getSelectionModel().getSelectedItem();
         if(selectedCustomer == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Please select a customer to modify.");
             alert.showAndWait();
@@ -72,11 +69,9 @@ public class CustomerMainController implements Initializable {
             Stage stage1= (Stage) ((Button)event.getSource()).getScene().getWindow();
             Parent root = loader.getRoot();
 
-            //scene = FXMLLoader.load(getClass().getResource("/sample/views/Customer_Modify.fxml"));
-
             CustomerModifyController CMController = loader.getController();
             System.out.println(selectedCustomer.getName());
-            CMController.customerInfo(selectedCustomer, selectedIndex);
+            CMController.customerInfo(selectedCustomer);
 
             stage1.setScene(new Scene(root));
             stage1.show();

@@ -78,17 +78,17 @@ public class CustomerModifyController implements Initializable {
 
     public void onActionSaveCustomer(ActionEvent event) {
         try {
-            //int customerId = Integer.parseInt(customerIDField.getText());
+            int customerId = Integer.parseInt(customerIDField.getText());
             String customerName = customerNameField.getText();
             if (customerName.isEmpty()) {
                 System.out.println("Empty");
             }
             String customerAddress = customerAddressField.getText();
             String customerPostalCode = customerPostalCodeField.getText();
-            String customerPhone = customerAddressField.getText();
+            String customerPhone = customerPhoneNumberField.getText();
             int customerCountry = customerCountryCombo.getValue().getCountryId();
             int customerDivision = customerDivisionCombo.getValue().getDivisionId();
-            CustomerQuery.updateCustomer(customerName, customerAddress, customerPostalCode, customerPhone, customerCountry, customerDivision);
+            CustomerQuery.updateCustomer(customerName, customerAddress, customerPostalCode, customerPhone, customerDivision, customerId);
             System.out.println("Saved");
             stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
             scene = FXMLLoader.load(getClass().getResource("/sample/views/Appointments_Main.fxml"));
@@ -108,18 +108,16 @@ public class CustomerModifyController implements Initializable {
         customerDivisionCombo.setItems(DivisionQuery.getCountryDivisions(C.getCountryId()));
 
     }
-    public void customerInfo(Customer customer, int selectedIndex) throws SQLException {
+
+    public void customerInfo(Customer customer) throws SQLException {
         try{
             selectedCustomer = customer;
-            selectedIndex = selectedIndex;
             customerIDField.setText(Integer.toString(this.selectedCustomer.getId()));
             customerNameField.setText(selectedCustomer.getName());
             customerAddressField.setText(selectedCustomer.getAddress());
             customerPhoneNumberField.setText(selectedCustomer.getPhoneNumber());
             customerPostalCodeField.setText(selectedCustomer.getPostalCode());
-
             customerCountryCombo.setItems(CountryQuery.getCountryList());
-
             customerDivisionCombo.setItems(DivisionQuery.getDivisionList());
             customerCountryCombo.setValue(DivisionQuery.findCountry(customer.getDivisionID()));
             customerDivisionCombo.setValue(DivisionQuery.findById(customer.getDivisionID()));
