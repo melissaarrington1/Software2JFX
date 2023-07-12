@@ -28,7 +28,7 @@ public class NewCustomerController implements Initializable {
     Stage stage;
     Parent scene;
 
-    //private Button
+
     @FXML
     private TextField customerIDField;
     @FXML

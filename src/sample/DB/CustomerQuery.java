@@ -11,7 +11,10 @@ import java.sql.*;
 import java.time.LocalDateTime;
 
 public class CustomerQuery {
-
+    /**
+     * SQL Query to Read a list of all customers from the database
+     * @return customerList
+     */
     public static ObservableList<Customer> getCustomerList() {
         ObservableList<Customer> customerList = FXCollections.observableArrayList();
         try {
@@ -32,7 +35,7 @@ public class CustomerQuery {
                 String customerCountryName = rs.getString("Country");
                 Customer c = new Customer(customerName, customerAddress, customerPostalCode, customerPhone, createdBy, lastUpdatedBy, customerDivisionId, customerDivisionName, customerCountryId, customerCountryName, customerId);
                 customerList.add(c);
-                System.out.println("*");
+                //System.out.println("*");
             }
         } catch (SQLException e) {
             e.printStackTrace();
