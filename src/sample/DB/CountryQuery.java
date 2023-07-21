@@ -37,6 +37,11 @@ public class CountryQuery {
         return countryList;
     }
 
+    /**
+     * Finding a country by ID
+     * @param countryId
+     * @return
+     */
     public static Country findById(int countryId) {
         for(Country c:getCountryList()) {
             if(c.getCountryId() == countryId) {

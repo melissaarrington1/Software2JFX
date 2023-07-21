@@ -35,4 +35,24 @@ public class ContactQuery {
         }
         return contactList;
     }
+
+    /**
+     *  Getting the Contact ID for a selected Contact Name
+     * @param contactName
+     * @return
+     * @throws SQLException
+     */
+    public static int getContactId(String contactName) throws SQLException {
+        int contactId = 0;
+        String sql = "SELECT * FROM contacts WHERE Contact_Name = ?";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        ps.setString(1, contactName);
+        ResultSet rs = ps.executeQuery();
+
+        while(rs.next()) {
+            contactId = rs.getInt("Contact_ID");
+        }
+        return contactId;
+    }
+
 }

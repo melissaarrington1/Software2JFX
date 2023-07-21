@@ -10,14 +10,10 @@ public class Customer {
     private String phoneNumber;
     private String countries;
     private String division;
-    private String createDate;
-    private String createdBy;
-    private String lastUpdate;
-    private String lastUpdatedBy;
     private int divisionID;
     private int countryId;
 
-    public Customer(int id, String name, String address, String phoneNumber, String postalCode, String countries, String division, String createDate, String createdBy, String lastUpdate, String lastUpdatedBy, int divisionID, int countryId) {
+    public Customer(int id, String name, String address, String phoneNumber, String postalCode, String countries, String division, int divisionID, int countryId) {
     this.id = id;
     this.name = name;
     this.address = address;
@@ -25,27 +21,23 @@ public class Customer {
     this.postalCode = postalCode;
     this.countries = countries;
     this.division = division;
-    this.createDate = createDate;
-    this.createdBy = createdBy;
-    this.lastUpdate = lastUpdate;
-    this.lastUpdatedBy = lastUpdatedBy;
     this.divisionID = divisionID;
     this.countryId = countryId;
 }
 
-    public Customer( String name, String address, String postalCode, String phoneNumber, String createdBy, String lastUpdatedBy, int divisionID, String division, int countryId, String countries, int id) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.postalCode = postalCode;
-        this.countries = countries;
-        this.division = division;
-        this.createdBy = createdBy;
-        this.lastUpdatedBy = lastUpdatedBy;
-        this.divisionID = divisionID;
-        this.countryId = countryId;
-    }
+//    public Customer( String name, String address, String postalCode, String phoneNumber, String createdBy, String lastUpdatedBy, int divisionID, String division, int countryId, String countries, int id) {
+//        this.id = id;
+//        this.name = name;
+//        this.address = address;
+//        this.phoneNumber = phoneNumber;
+//        this.postalCode = postalCode;
+//        this.countries = countries;
+//        this.division = division;
+//        this.createdBy = createdBy;
+//        this.lastUpdatedBy = lastUpdatedBy;
+//        this.divisionID = divisionID;
+//        this.countryId = countryId;
+//    }
 
 //    public Customer(String customerName, String customerAddress, String customerPostalCode, String customerPhone, String createdBy, String lastUpdatedBy, int customerDivisionId, String customerDivisionName, int customerCountryId, String customerCountryName, int customerID) {
 //        this.customerID = customerID;
@@ -64,7 +56,9 @@ public class Customer {
 //    }
 
 
-    public int getId() { return id; }
+    public int getId() {
+        return id;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -118,43 +112,39 @@ public class Customer {
         this.division = division;
     }
 
-    public String getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(String createDate) {
-        this.createDate = createDate;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public String getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(String lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
-
-    public String getLastUpdatedBy() {
-        return lastUpdatedBy;
-    }
-
-    public void setLastUpdatedBy(String lastUpdatedBy) {
-        this.lastUpdatedBy = lastUpdatedBy;
-    }
-
     public int getDivisionID() {
         return divisionID;
     }
 
     public void setDivisionID(int divisionID) {
         this.divisionID = divisionID;
+    }
+
+    /**
+     * Returns a string representation of the object.
+     *
+     * @return a string representation of the object.
+     * @apiNote In general, the
+     * {@code toString} method returns a string that
+     * "textually represents" this object. The result should
+     * be a concise but informative representation that is easy for a
+     * person to read.
+     * It is recommended that all subclasses override this method.
+     * The string output is not necessarily stable over time or across
+     * JVM invocations.
+     * @implSpec The {@code toString} method for class {@code Object}
+     * returns a string consisting of the name of the class of which the
+     * object is an instance, the at-sign character `{@code @}', and
+     * the unsigned hexadecimal representation of the hash code of the
+     * object. In other words, this method returns a string equal to the
+     * value of:
+     * <blockquote>
+     * <pre>
+     * getClass().getName() + '@' + Integer.toHexString(hashCode())
+     * </pre></blockquote>
+     */
+    @Override
+    public String toString() {
+        return name;
     }
 }

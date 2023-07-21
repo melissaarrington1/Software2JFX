@@ -27,13 +27,12 @@ public class CustomerQuery {
                 String customerAddress = rs.getString("Address");
                 String customerPostalCode = rs.getString("Postal_Code");
                 String customerPhone = rs.getString("Phone");
-                String createdBy = rs.getString("Created_By");
-                String lastUpdatedBy = rs.getString("Last_Updated_By");
                 int customerDivisionId = rs.getInt("Division_ID");
                 String customerDivisionName = rs.getString("Division");
                 int customerCountryId = rs.getInt("Country_ID");
                 String customerCountryName = rs.getString("Country");
-                Customer c = new Customer(customerName, customerAddress, customerPostalCode, customerPhone, createdBy, lastUpdatedBy, customerDivisionId, customerDivisionName, customerCountryId, customerCountryName, customerId);
+                //                           int id, String name, String address, String phoneNumber, String postalCode, String countries, String division, String createDate, String createdBy, String lastUpdate, String lastUpdatedBy, int divisionID, int countryId)
+                Customer c = new Customer(customerId, customerName, customerAddress, customerPhone, customerPostalCode, customerCountryName, customerDivisionName, customerDivisionId, customerCountryId);
                 customerList.add(c);
                 //System.out.println("*");
             }
