@@ -25,6 +25,9 @@ public class Customer {
     this.countryId = countryId;
 }
 
+    public Customer(int customerIdSearch, String customerName) {
+    }
+
 //    public Customer( String name, String address, String postalCode, String phoneNumber, String createdBy, String lastUpdatedBy, int divisionID, String division, int countryId, String countries, int id) {
 //        this.id = id;
 //        this.name = name;

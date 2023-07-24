@@ -3,6 +3,7 @@ package sample.DB;
 import com.mysql.cj.x.protobuf.MysqlxPrepare;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import sample.model.Contact;
 import sample.model.Country;
 import sample.model.Customer;
 import sample.model.Division;
@@ -79,16 +80,6 @@ public class CustomerQuery {
 //        }
     }
 
-    public static void updateCustomer(String customerName, String customerAddress, int customerPostalCode, String customerPhone, int customerDivisionId, String customerDivisionName, int customerCountryId, String customerCountryName, int customerId) {
-        try {
-            String sql = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?,  Division_ID = ? WHERE Customer_ID = ?";
-            PreparedStatement updateCustomer = JDBC.connection.prepareStatement(sql);
-            updateCustomer.setString(1, customerName);
-            updateCustomer.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public static void updateCustomer(String customerName, String customerAddress, String customerPostalCode, String customerPhone, int customerDivision, int customerId) {
         try {
@@ -101,6 +92,36 @@ public class CustomerQuery {
             updateCustomer.setInt(5, customerDivision);
             updateCustomer.setInt(6, customerId);
             updateCustomer.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Customer getCustomerName(int customerId) throws SQLException {
+        try{
+            String sql = "SELECT * FROM customers WHERE Customer_ID = ?";
+            PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+            ps.setInt(1, customerId);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int id = rs.getInt("Customer_ID");
+            String name = rs.getString("Customer_Name");
+
+            Customer c = new Customer(id, name);
+            return c;
+
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void deleteCustomer(int customerId) {
+        try {
+            String sql = "DELETE FROM customers WHERE Customer_ID = ?";
+            PreparedStatement deleteCust = JDBC.connection.prepareStatement(sql);
+            deleteCust.setInt(1, customerId);
+            deleteCust.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -1,17 +1,16 @@
 package sample.controller;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import sample.DB.AppointmentQuery;
 import sample.DB.CustomerQuery;
 import sample.model.Customer;
 import sample.model.Appointment;
@@ -97,12 +96,44 @@ public class CustomerMainController implements Initializable {
 
 
     public void onActionDeleteCustomer(ActionEvent actionEvent) {
-        Customer customer = mainCustomerTable.getSelectionModel().getSelectedItem();
+        ObservableList<Customer> customerList = CustomerQuery.getCustomerList();
 
+        int count = 0;
+        ObservableList<Appointment> appointmentList = AppointmentQuery.getAppointmentList();
+        Customer customer = mainCustomerTable.getSelectionModel().getSelectedItem();
+//checking to see if customer selected
         if(customer == null) {
             Alert deleteAlert = new Alert(Alert.AlertType.ERROR, "Please select a customer to delete!");
             deleteAlert.show();
             return;
+        }
+//searching for customer to delete by ID
+        int selectedCustomer = mainCustomerTable.getSelectionModel().getSelectedItem().getId();
+        for(Appointment appointment : appointmentList) {
+            int appointmentCustomerId = appointment.getCustomerId();
+            if(appointmentCustomerId == selectedCustomer) {
+                count++;
+            }
+        }
+
+        // if !appointment, proceed to delete customer
+        if(count == 0) {
+            Alert delete = new Alert(Alert.AlertType.WARNING);
+            delete.setTitle("Alert");
+            delete.setContentText("Are you sure you want to delete this customer?");
+            delete.getButtonTypes().clear();
+            delete.getButtonTypes().addAll(ButtonType.CANCEL, ButtonType.OK);
+            delete.showAndWait();
+
+            if (delete.getResult() == ButtonType.OK) {
+                CustomerQuery.deleteCustomer(mainCustomerTable.getSelectionModel().getSelectedItem().getId());
+
+                customerList = CustomerQuery.getCustomerList();
+                mainCustomerTable.setItems(customerList);
+                mainCustomerTable.refresh();
+            } else if (delete.getResult() == ButtonType.CANCEL) {
+                delete.close();
+            }
         }
     }
 

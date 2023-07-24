@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 
@@ -34,9 +35,12 @@
                         <Button layoutX="85.0" layoutY="262.0" mnemonicParsing="false" onAction="#onActionCreateAppointment" text="Create Appointment" />
                         <Button layoutX="347.0" layoutY="262.0" mnemonicParsing="false" onAction="#onActionModifyAppointment" text="Modify Appointment" />
                         <Button layoutX="616.0" layoutY="262.0" mnemonicParsing="false" onAction="#onActionDeleteAppointment" text="Delete Appointment" />
-                        <RadioButton fx:id="filterByWeek" layoutX="373.0" layoutY="15.0" mnemonicParsing="false" text="Week" />
-                        <RadioButton fx:id="filterByMonth" layoutX="588.0" layoutY="15.0" mnemonicParsing="false" text="Month" />
-                        <RadioButton layoutX="174.0" layoutY="15.0" mnemonicParsing="false" text="All" />
+                        <RadioButton fx:id="filterByWeek" layoutX="373.0" layoutY="15.0" mnemonicParsing="false" onAction="#onActionFilterByWeek" text="Week">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="appointmentToggleGroup" />
+                           </toggleGroup></RadioButton>
+                        <RadioButton fx:id="filterByMonth" layoutX="588.0" layoutY="15.0" mnemonicParsing="false" onAction="#onActionFilterByMonth" text="Month" toggleGroup="$appointmentToggleGroup" />
+                        <RadioButton fx:id="filterAll" layoutX="174.0" layoutY="15.0" mnemonicParsing="false" onAction="#onActionFilterAll" selected="true" text="All" toggleGroup="$appointmentToggleGroup" />
                      </children>
                   </AnchorPane>
             </content>

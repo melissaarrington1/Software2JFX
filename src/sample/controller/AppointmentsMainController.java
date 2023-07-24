@@ -10,9 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import sample.DB.AppointmentQuery;
@@ -54,7 +52,12 @@ public class AppointmentsMainController implements Initializable {
     @FXML
     private URL location;
 
-
+    @FXML
+    private RadioButton filterByWeek;
+    @FXML
+    private RadioButton filterByMonth;
+    @FXML
+    private ToggleGroup appointmentToggleGroup;
 
 
 
@@ -72,11 +75,29 @@ public class AppointmentsMainController implements Initializable {
 
     @FXML
     void onActionModifyAppointment(ActionEvent event) throws IOException {
-        System.out.println("modify appointment button clicked");
-        stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/sample/views/New_Customer.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+        Appointment selectedAppointment = (Appointment) mainAppointmentsTable.getSelectionModel().getSelectedItem();
+
+        if(selectedAppointment == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please select an appointment to modify.");
+            alert.showAndWait();
+        }
+        if(selectedAppointment != null) {
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/sample/views/Modify_Appointment.fxml"));
+
+            loader.load();
+
+            Stage stage1= (Stage) ((Button)event.getSource()).getScene().getWindow();
+            Parent root = loader.getRoot();
+
+            AppointmentModifyController AMController = loader.getController();
+            System.out.println(selectedAppointment.getAppointmentTitle());
+            AMController.appointmentInfo(selectedAppointment);
+
+            stage1.setScene(new Scene(root));
+            stage1.show();
+        }
     }
 
     @Override
@@ -95,5 +116,32 @@ public class AppointmentsMainController implements Initializable {
     }
 
     public void onActionDeleteAppointment(ActionEvent actionEvent) {
+    }
+
+
+    public void onActionFilterByWeek(ActionEvent actionEvent) {
+        if(filterByWeek.isSelected()) {
+            try {
+//for loop going through all appt observ. list. Same thing for month. use system.now()
+                //if condition to check start dates week
+                //if is currentweek, move appt to filtered observable list
+                //after for loop, populate table view with this filtered list
+                mainAppointmentsTable.setItems(AppointmentQuery.getWeeklyAppointments());
+                mainAppointmentsTable.setPlaceholder(new Label("No appointment exists for next week!"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void onActionFilterByMonth(ActionEvent actionEvent) {
+        mainAppointmentsTable.setItems(AppointmentQuery.getMonthlyAppointments());
+        mainAppointmentsTable.setPlaceholder(new Label("No appointment exists for next month!"));
+    }
+
+
+
+    public void onActionFilterAll(ActionEvent actionEvent) {
+        mainAppointmentsTable.setItems(AppointmentQuery.getAppointmentList());
     }
 }

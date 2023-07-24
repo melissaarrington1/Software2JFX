@@ -73,7 +73,6 @@ public class NewCustomerController implements Initializable {
             Country customerCountry = customerCountryCombo.getValue();
             int customerDivision = customerDivisionCombo.getValue().getDivisionId();
             CustomerQuery.addCustomer(customerName, customerAddress, customerPostalCode, customerPhoneNumber, customerCountry, customerDivision);
-            System.out.println("cool");
 
         } catch (Exception e) {
             e.printStackTrace();

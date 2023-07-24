@@ -1,7 +1,5 @@
 package sample.controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.util.converter.LocalDateTimeStringConverter;
 import sample.DB.AppointmentQuery;
 import sample.DB.ContactQuery;
 import sample.DB.CustomerQuery;
@@ -20,13 +17,11 @@ import sample.utility.TimeHelper;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-public class NewAppointmentController implements Initializable {
+public class AppointmentModifyController implements Initializable {
     Stage stage;
     Parent scene;
 
@@ -55,33 +50,59 @@ public class NewAppointmentController implements Initializable {
     @FXML
     private ComboBox<LocalTime> appointmentEndTimeCombo;
 
-    /**
-     * Button for Canceling without creating a new appointment.
-     * @param event
-     * @throws IOException
-     */
-    public void onActionCancel(ActionEvent event) throws IOException {
-        System.out.println("create appointment button clicked");
-        stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/sample/views/Appointments_Main.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
-    }
+    public Appointment selectedAppointment;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         appointmentContactCombo.setItems(ContactQuery.getAllContacts());
         appointmentCustCombo.setItems(CustomerQuery.getCustomerList());
         appointmentUserCombo.setItems(UserQuery.getUserList());
-
         appointmentStartTimeCombo.setItems(TimeHelper.getStartTimes());
         appointmentEndTimeCombo.setItems(TimeHelper.getEndTimes());
     }
 
+    public void appointmentInfo(Appointment appointment) {
+        try {
+            selectedAppointment = appointment;
+            appointmentIDField.setText(Integer.toString(this.selectedAppointment.getAppointmentId()));
+            appointmentTitleField.setText(selectedAppointment.getAppointmentTitle());
+            appointmentDescField.setText(selectedAppointment.getAppointmentDescription());
+            appointmentTypeField.setText(selectedAppointment.getAppointmentType());
+            appointmentLocationField.setText(selectedAppointment.getAppointmentLocation());
+
+            for(Contact c: appointmentContactCombo.getItems()) {
+                if(selectedAppointment.getAppointmentContact() == c.getContactId()) {
+                    appointmentContactCombo.setValue(c);
+                }
+            }
+            for(Customer cust: appointmentCustCombo.getItems()) {
+                if(selectedAppointment.getAppointmentContact() == cust.getId()) {
+                    appointmentCustCombo.setValue(cust);
+                }
+            }
+            for(User u: appointmentUserCombo.getItems()) {
+                if(selectedAppointment.getAppointmentContact() == u.getUserId()) {
+                    appointmentUserCombo.setValue(u);
+                }
+            }
+
+
+
+            appointmentStartDate.setValue(selectedAppointment.getAppointmentStart().toLocalDate());
+            appointmentStartTimeCombo.setValue(selectedAppointment.getAppointmentStart().toLocalTime());
+
+
+
+
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     public void onActionSaveAppointment(ActionEvent actionEvent) throws IOException {
         try {
+            int appointmentId = Integer.parseInt(appointmentIDField.getText());
             String appointmentTitle = appointmentTitleField.getText();
             String appointmentDescription = appointmentDescField.getText();
             String appointmentLocation = appointmentLocationField.getText();
@@ -96,36 +117,24 @@ public class NewAppointmentController implements Initializable {
             User user = appointmentUserCombo.getValue();
             int userId = user.getUserId();
 
-
-            System.out.println("clicked appointment");
-
             if(contact == null) {
                 Alert alert = new Alert(Alert.AlertType.WARNING, "Contact cannot be blank.");
                 return;
             }
             if(customer == null) {
-               // Alert alert = new Alert();
+                // Alert alert = new Alert();
                 return;
             }
             if(user == null) {
                 //Alert alert = new Alert();
                 return;
             }
-
             LocalDateTime start = LocalDateTime.of(appointmentStartDate.getValue(), appointmentStartTimeCombo.getValue());
             LocalDateTime end = LocalDateTime.of(appointmentEndDate.getValue(), appointmentEndTimeCombo.getValue());
 
-            // todo: check that end is after start
-
-            //todo: check if within business hours (fill combo box list with times - limit to business hours) 2 private lists (start/end + getters) and method to load lists
-
-            //todo: check for appointment overlap
-            AppointmentQuery.addAppointment(appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, contactId, customerId, userId, start, end);
-
-        }
-        catch(NullPointerException | SQLException e) {
+            AppointmentQuery.updateAppointment(appointmentId, appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, contactId, customerId, userId, start, end);
+        } catch (Exception e) {
             e.printStackTrace();
-            System.out.println(e);
         }
         stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/sample/views/Appointments_Main.fxml"));
@@ -133,7 +142,10 @@ public class NewAppointmentController implements Initializable {
         stage.show();
     }
 
-
-    public void onActionSave(ActionEvent actionEvent) {
+    public void onActionCancel(ActionEvent actionEvent) throws IOException {
+        stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/sample/views/Customers_Main.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 }
