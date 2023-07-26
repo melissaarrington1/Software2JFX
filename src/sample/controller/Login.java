@@ -36,6 +36,12 @@ public class Login implements Initializable {
     Label usernameLabel;
     @FXML
     Label passwordLabel;
+    @FXML
+    Button loginBtn;
+    @FXML
+    Button exitButton;
+    @FXML
+    Label title;
 
     Stage stage;
     Parent scene;
@@ -48,9 +54,13 @@ public class Login implements Initializable {
         rb = ResourceBundle.getBundle("sample/resources/Nat", Locale.getDefault());
         ZoneId zoneId = ZoneId.systemDefault();
         String location = ZoneId.systemDefault().toString();
+        title.setText(rb.getString("title"));
         langLabel.setText(location);
         usernameLabel.setText(rb.getString("username"));
         passwordLabel.setText(rb.getString("password"));
+        loginBtn.setText(rb.getString("login"));
+        exitButton.setText(rb.getString("exit"));
+
 
         Locale france = new Locale("fr", "FR");
         Locale espanol = new Locale("es", "ES");
