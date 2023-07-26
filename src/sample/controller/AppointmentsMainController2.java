@@ -1,13 +1,8 @@
 package sample.controller;
-import java.io.IOException;
-import java.net.URL;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.Optional;
-import java.util.ResourceBundle;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,8 +16,23 @@ import sample.DB.CustomerQuery;
 import sample.model.Appointment;
 import sample.model.Customer;
 
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class AppointmentsMainController implements Initializable {
+
+public class AppointmentsMainController2 implements Initializable {
+    public TableView<Customer> mainCustomerTable;
+    public TableColumn customerIdCol;
+    public TableColumn customerNameCol;
+    public TableColumn customerAddressCol;
+    public TableColumn customerPostalCodeCol;
+    public TableColumn customerPhoneCol;
+    public TableColumn customerCountryCol;
+    public TableColumn customerStateCol;
     Stage stage;
     Parent scene;
 
@@ -105,7 +115,6 @@ public class AppointmentsMainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        mainAppointmentsTable.setItems(AppointmentQuery.getAppointmentList());
         appointmentIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         appointmentTitleCol.setCellValueFactory(new PropertyValueFactory<>("appointmentTitle"));
         appointmentDescCol.setCellValueFactory(new PropertyValueFactory<>("appointmentDescription"));
@@ -116,6 +125,17 @@ public class AppointmentsMainController implements Initializable {
         appointmentUserCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
         appointmentStartCol.setCellValueFactory(new PropertyValueFactory<>("appointmentStart"));
         appointmentEndCol.setCellValueFactory(new PropertyValueFactory<>("appointmentEnd"));
+
+        customerIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        customerNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        customerAddressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
+        customerPostalCodeCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+        customerPhoneCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        customerCountryCol.setCellValueFactory(new PropertyValueFactory<>("countries"));
+        customerStateCol.setCellValueFactory(new PropertyValueFactory<>("division"));
+
+        loadAppointmentsTab();
+
     }
 
     public void onActionDeleteAppointment(ActionEvent actionEvent) throws SQLException {
@@ -162,5 +182,106 @@ public class AppointmentsMainController implements Initializable {
 
     public void onActionFilterAll(ActionEvent actionEvent) {
         mainAppointmentsTable.setItems(AppointmentQuery.getAppointmentList());
+    }
+
+
+    /**
+     * Button for Modifying Customers. Redirects to the CustomerModify page when clicked.
+     * If there is no customer selected, a Warning Error will occur.
+     * @param event
+     * @throws IOException
+     */
+    public void onActionModifyCustomer(ActionEvent event) throws SQLException, IOException {
+
+        Customer selectedCustomer = (Customer) mainCustomerTable.getSelectionModel().getSelectedItem();
+
+        if(selectedCustomer == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please select a customer to modify.");
+            alert.showAndWait();
+        }
+        if(selectedCustomer != null) {
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/sample/views/Customer_Modify.fxml"));
+
+            loader.load();
+
+            Stage stage1= (Stage) ((Button)event.getSource()).getScene().getWindow();
+            Parent root = loader.getRoot();
+
+            CustomerModifyController CMController = loader.getController();
+            System.out.println(selectedCustomer.getName());
+            CMController.customerInfo(selectedCustomer);
+
+            stage1.setScene(new Scene(root));
+            stage1.show();
+        }
+    }
+
+
+    /***
+     * Event that takes you to the Add Customer screen.
+     *
+     * @param event
+     * @throws IOException
+     */
+    public void onActionCreateCustomer(ActionEvent event) throws IOException {
+        System.out.println("lets create a new customer button clicked");
+        stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/sample/views/New_Customer.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
+    }
+
+
+
+
+    public void onActionDeleteCustomer(ActionEvent actionEvent) throws SQLException {
+        ObservableList<Customer> customerList = CustomerQuery.getCustomerList();
+
+        int count = 0;
+        ObservableList<Appointment> appointmentList = AppointmentQuery.getAppointmentList();
+        Customer customer = mainCustomerTable.getSelectionModel().getSelectedItem();
+        //checking to see if customer selected
+        if(customer == null) {
+            Alert deleteAlert = new Alert(Alert.AlertType.ERROR, "Please select a customer to delete!");
+            deleteAlert.show();
+            return;
+        }
+        //searching for customer to delete by ID
+        int selectedCustomer = mainCustomerTable.getSelectionModel().getSelectedItem().getId();
+
+        Alert delete = new Alert(Alert.AlertType.WARNING);
+        delete.setTitle("Alert");
+        delete.setContentText("This customer and all associated appointments will be deleted. Are you sure you want to delete this customer?");
+        delete.getButtonTypes().clear();
+        delete.getButtonTypes().addAll(ButtonType.CANCEL, ButtonType.OK);
+        delete.showAndWait();
+
+        if (delete.getResult() == ButtonType.OK) {
+            AppointmentQuery.deleteAppointmentByCustomer(mainCustomerTable.getSelectionModel().getSelectedItem().getId());
+            CustomerQuery.deleteCustomer(mainCustomerTable.getSelectionModel().getSelectedItem().getId());
+
+            customerList = CustomerQuery.getCustomerList();
+            mainCustomerTable.setItems(customerList);
+            mainCustomerTable.refresh();
+        } else if (delete.getResult() == ButtonType.CANCEL) {
+            delete.close();
+        }
+
+
+    }
+    private void loadAppointmentsTab() {
+        mainAppointmentsTable.setItems(AppointmentQuery.getAppointmentList());
+
+    }
+
+    public void onCustomerTab(Event event) {
+        mainCustomerTable.setItems(CustomerQuery.getCustomerList());
+
+    }
+
+    public void onAppointmentsTab(Event event) {
+        loadAppointmentsTab();
     }
 }

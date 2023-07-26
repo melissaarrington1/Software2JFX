@@ -80,7 +80,30 @@ public class AppointmentQuery {
         }
     }
 
-   public static ObservableList<Appointment> getWeeklyAppointments() {
+    public static void deleteAppointment(int appointmentId) throws SQLException {
+        try {
+            String sql = "DELETE FROM appointments WHERE Appointment_ID = ?";
+            PreparedStatement deleteAppt = JDBC.connection.prepareStatement(sql);
+            deleteAppt.setInt(1, appointmentId);
+            deleteAppt.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteAppointmentByCustomer(int customerId) throws SQLException {
+        try {
+            String sql = "DELETE FROM appointments WHERE Customer_ID = ?";
+            PreparedStatement deleteAppt = JDBC.connection.prepareStatement(sql);
+            deleteAppt.setInt(1, customerId);
+            deleteAppt.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+        public static ObservableList<Appointment> getWeeklyAppointments() {
         ObservableList<Appointment> weekly = FXCollections.observableArrayList();
         try {
             String sql = "SELECT * FROM appointments INNER JOIN contacts ON appointments.Contact_ID = contacts.Contact_ID WHERE YEARWEEK(START) = YEARWEEK(NOW()) ORDER BY appointments.Appointment_ID";

@@ -83,9 +83,31 @@ public class NewAppointmentController implements Initializable {
     public void onActionSaveAppointment(ActionEvent actionEvent) throws IOException {
         try {
             String appointmentTitle = appointmentTitleField.getText();
+            if(appointmentTitle.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Please enter an appointment title.");
+                alert.showAndWait();
+                return;
+            }
             String appointmentDescription = appointmentDescField.getText();
+            if(appointmentDescription.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Please enter an appointment description.");
+                alert.showAndWait();
+                return;
+            }
+
             String appointmentLocation = appointmentLocationField.getText();
+            if(appointmentLocation.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Please enter an appointment location.");
+                alert.showAndWait();
+                return;
+            }
+
             String appointmentType = appointmentTypeField.getText();
+            if(appointmentType.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Please enter an appointment type.");
+                alert.showAndWait();
+                return;
+            }
 
             Contact contact = appointmentContactCombo.getValue();
             int contactId = contact.getContactId();
@@ -97,18 +119,19 @@ public class NewAppointmentController implements Initializable {
             int userId = user.getUserId();
 
 
-            System.out.println("clicked appointment");
-
             if(contact == null) {
-                Alert alert = new Alert(Alert.AlertType.WARNING, "Contact cannot be blank.");
+                //Alert alert = new Alert(Alert.AlertType.WARNING, "Contact cannot be blank.");
+                //alert.showAndWait();
                 return;
             }
             if(customer == null) {
-               // Alert alert = new Alert();
+              //Alert alert = new Alert(Alert.AlertType.WARNING, "Must have a customer to make an appointment");
+                //alert.showAndWait();
                 return;
             }
             if(user == null) {
-                //Alert alert = new Alert();
+               // Alert alert = new Alert(Alert.AlertType.WARNING, "Must have a user to make an appointment");
+                //alert.showAndWait();
                 return;
             }
 
@@ -116,10 +139,16 @@ public class NewAppointmentController implements Initializable {
             LocalDateTime end = LocalDateTime.of(appointmentEndDate.getValue(), appointmentEndTimeCombo.getValue());
 
             // todo: check that end is after start
-
-            //todo: check if within business hours (fill combo box list with times - limit to business hours) 2 private lists (start/end + getters) and method to load lists
+            if(Appointment.checkOverlapAppt(customerId, start, end)) {
+                System.out.println("appointment overlapping. ");
+                Alert alert = new Alert(Alert.AlertType.ERROR, "There is already an existing appointment for this time slot. Please choose another time slot.");
+                alert.showAndWait();
+                return;
+            }
 
             //todo: check for appointment overlap
+
+
             AppointmentQuery.addAppointment(appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, contactId, customerId, userId, start, end);
 
         }
@@ -128,12 +157,9 @@ public class NewAppointmentController implements Initializable {
             System.out.println(e);
         }
         stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/sample/views/Appointments_Main.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/sample/views/Appointments_Main2.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
 
-
-    public void onActionSave(ActionEvent actionEvent) {
-    }
 }

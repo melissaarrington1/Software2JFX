@@ -1,6 +1,9 @@
 package sample.model;
 
 import java.time.LocalDateTime;
+
+import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import sample.DB.AppointmentQuery;
 
 public class Appointment {
@@ -119,5 +122,30 @@ public class Appointment {
 
     public void setAppointmentEnd(LocalDateTime appointmentEnd) {
         this.appointmentEnd = appointmentEnd;
+    }
+
+    public static boolean checkOverlapAppt(int customerId, LocalDateTime appointmentStart, LocalDateTime appointmentEnd) {
+        ObservableList<Appointment> appointments = AppointmentQuery.getAppointmentList();
+        LocalDateTime start;
+        LocalDateTime end;
+
+        for(Appointment a : appointments) {
+            if(a.getAppointmentStart().isEqual(appointmentStart)) {
+                return true;
+            }
+
+//            start = a.getAppointmentStart();
+//            end = a.getAppointmentEnd();
+//            if(customerId != a.getCustomerId()) {
+//                continue;
+//            }
+//            if(start.isEqual(appointmentStart) || end.isEqual(appointmentEnd)) {
+//                Alert alert = new Alert(Alert.AlertType.WARNING, "Appointments cannot start or end at the same time.");
+//                alert.showAndWait();
+//                return false;
+//            }
+
+        }
+        return false;
     }
 }

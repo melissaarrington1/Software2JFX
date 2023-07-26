@@ -50,9 +50,8 @@ public class NewCustomerController implements Initializable {
      * @throws IOException for the unhandled exception
      */
     public void onActionCancel(ActionEvent event) throws IOException {
-        System.out.println("create appointment button clicked");
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/sample/views/Appointments_Main.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/sample/views/Appointments_Main2.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
@@ -80,9 +79,8 @@ public class NewCustomerController implements Initializable {
         }
 
 
-        //System.out.println("new customer saved clicked");
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/sample/views/Appointments_Main.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/sample/views/Appointments_Main2.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
