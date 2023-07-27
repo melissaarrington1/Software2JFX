@@ -134,16 +134,17 @@ public class Appointment {
                 return true;
             }
 
-//            start = a.getAppointmentStart();
-//            end = a.getAppointmentEnd();
-//            if(customerId != a.getCustomerId()) {
-//                continue;
-//            }
-//            if(start.isEqual(appointmentStart) || end.isEqual(appointmentEnd)) {
-//                Alert alert = new Alert(Alert.AlertType.WARNING, "Appointments cannot start or end at the same time.");
-//                alert.showAndWait();
-//                return false;
-//            }
+            if((a.getAppointmentStart().isAfter(appointmentStart) || a.getAppointmentStart().isEqual(appointmentStart)) && a.getAppointmentStart().isBefore(appointmentEnd)) {
+
+                return true;
+            }
+
+         else if(a.getAppointmentEnd().isAfter(appointmentStart) && (a.getAppointmentEnd().isBefore(appointmentEnd) || a.getAppointmentEnd().isEqual(appointmentEnd))) {
+            return true;
+        }
+        else if((a.getAppointmentStart().isBefore(appointmentStart) || a.getAppointmentStart().isEqual(appointmentStart)) && (a.getAppointmentEnd().isAfter(appointmentEnd) || a.getAppointmentEnd().isEqual(appointmentEnd))) {
+            return true;
+        }
 
         }
         return false;

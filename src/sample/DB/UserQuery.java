@@ -10,6 +10,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserQuery {
+    /**
+     * A method to get a list of all users from the database
+     * @return
+     */
     public static ObservableList<User> getUserList() {
         ObservableList<User> userList = FXCollections.observableArrayList();
 
@@ -29,5 +33,56 @@ public class UserQuery {
             throw new RuntimeException(e);
         }
         return userList;
+    }
+
+    public static boolean userLogin(String username, String password) throws SQLException {
+        try {
+            String sql = "SELECT * FROM Users WHERE BINARY User_Name = ? AND  Password = ?";
+            PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static int getUserId(String username) throws SQLException {
+        int userId = 0;
+        String sqlStatement = "select User_ID, User_Name from users where User_Name = '" + username + "'";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sqlStatement);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            userId = rs.getInt("User_ID");
+            username = rs.getString("User_Name");
+        }
+        return userId;
+    }
+
+    public static boolean usernameCheck(String username) {
+        try {
+            String sql = "SELECT * FROM Users WHERE  User_Name = ?";
+            PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+            ps.setString(1, username);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean passwordCheck(String password) {
+        try {
+            String sql = "SELECT * FROM Users WHERE Password = ?";
+            PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+            ps.setString(1, password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

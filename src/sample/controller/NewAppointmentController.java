@@ -147,6 +147,7 @@ public class NewAppointmentController implements Initializable {
             }
 
             //todo: check for appointment overlap
+            //todo check if end time is before start. if
 
 
             AppointmentQuery.addAppointment(appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, contactId, customerId, userId, start, end);

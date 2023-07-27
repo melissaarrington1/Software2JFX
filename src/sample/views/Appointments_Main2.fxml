@@ -41,6 +41,7 @@
                            </toggleGroup></RadioButton>
                         <RadioButton fx:id="filterByMonth" layoutX="588.0" layoutY="15.0" mnemonicParsing="false" onAction="#onActionFilterByMonth" text="Month" toggleGroup="$appointmentToggleGroup" />
                         <RadioButton fx:id="filterAll" layoutX="174.0" layoutY="15.0" mnemonicParsing="false" onAction="#onActionFilterAll" selected="true" text="All" toggleGroup="$appointmentToggleGroup" />
+                        <Button fx:id="logOut" layoutX="794.0" layoutY="319.0" mnemonicParsing="false" onAction="#onActionLogOut" text="Log Out" />
                      </children>
                   </AnchorPane>
             </content>

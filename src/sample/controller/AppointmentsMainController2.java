@@ -284,4 +284,23 @@ public class AppointmentsMainController2 implements Initializable {
     public void onAppointmentsTab(Event event) {
         loadAppointmentsTab();
     }
+
+    /**
+     * Method for logging out of application. Sends you back to the login screen.
+     * @param event
+     * @throws IOException
+     */
+    public void onActionLogOut(ActionEvent event) throws IOException {
+        System.out.println("logging out");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to log out?");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/sample/views/Login.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
+
+    }
 }

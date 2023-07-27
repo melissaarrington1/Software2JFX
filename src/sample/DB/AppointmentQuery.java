@@ -154,4 +154,31 @@ public class AppointmentQuery {
         }
         return monthly;
     }
+
+    public static ObservableList<Appointment> getUserAppointments(int userId) {
+        ObservableList<Appointment> userAppointments = FXCollections.observableArrayList();
+        try {
+            String sql = "SELECT * FROM Appointments WHERE User_ID = " + userId + "";
+            PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int appointmentId = rs.getInt("Appointment_ID");
+                String appointmentTitle = rs.getString("Title");
+                String appointmentDescription = rs.getString("Description");
+                String appointmentType = rs.getString("Type");
+                String appointmentLocation = rs.getString("Location");
+                int contactId = rs.getInt("Contact_ID");
+                int customerId = rs.getInt("Customer_ID");
+                int appointmentUserId = rs.getInt("User_ID");
+                LocalDateTime appointmentStart = rs.getTimestamp("Start").toLocalDateTime();
+                LocalDateTime appointmentEnd = rs.getTimestamp("End").toLocalDateTime();
+                Appointment a = new Appointment(appointmentId, appointmentTitle, appointmentDescription, appointmentType, appointmentLocation, contactId, customerId, appointmentUserId, appointmentStart, appointmentEnd);
+                userAppointments.add(a);
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return userAppointments;
+    }
 }

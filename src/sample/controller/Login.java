@@ -1,5 +1,6 @@
 package sample.controller;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,11 +17,17 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import sample.DB.AppointmentQuery;
+import sample.DB.UserQuery;
+import sample.model.Appointment;
+
+import static sample.DB.UserQuery.*;
 
 /**
  * Login Class
@@ -42,19 +49,24 @@ public class Login implements Initializable {
     Button exitButton;
     @FXML
     Label title;
-
-    Stage stage;
-    Parent scene;
     @FXML
     private Button onActionLoginBtn;
 
+    Stage stage;
+    Parent scene;
+
+
+
+    LocalDateTime currentTime = LocalDateTime.now();
+    LocalDateTime currentTime15Min = LocalDateTime.now().plusMinutes(15);
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         rb = ResourceBundle.getBundle("sample/resources/Nat", Locale.getDefault());
         ZoneId zoneId = ZoneId.systemDefault();
         String location = ZoneId.systemDefault().toString();
-        title.setText(rb.getString("title"));
+        //title.setText(rb.getString("title"));
+
         langLabel.setText(location);
         usernameLabel.setText(rb.getString("username"));
         passwordLabel.setText(rb.getString("password"));
@@ -71,8 +83,8 @@ public class Login implements Initializable {
         System.out.println(rb.getString("hello") + " " + rb.getString("world"));
     }
 
-    @FXML
-    void onActionLoginBtn(ActionEvent event) throws IOException {
+
+    public void onActionLoginBtn(ActionEvent event) throws IOException, SQLException {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
@@ -81,17 +93,51 @@ public class Login implements Initializable {
             alert.showAndWait();
             return;
         }
-//        if (password.isEmpty()) {
-//            Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter a password.");
-//            alert.showAndWait();
-//            return;
-//        }
+        if (password.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter a password.");
+            alert.showAndWait();
+            return;
+        }
+        //verifying if both username and password are correct
+         if(!userLogin(username, password)){
+            int userId = getUserId(username);
+            ObservableList<Appointment> userAppointments = AppointmentQuery.getUserAppointments(userId);
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Username or password is incorrect.");
+            alert.showAndWait();
+            return;
+        }
 
-        System.out.println("login button clicked");
-        stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/sample/views/Appointments_Main2.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.centerOnScreen();
-        stage.show();
+         else {
+             int userId = getUserId(username);
+
+             ObservableList<Appointment> userAppointments = AppointmentQuery.getUserAppointments(userId);
+
+             System.out.println("login button clicked");
+             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+             scene = FXMLLoader.load(getClass().getResource("/sample/views/Appointments_Main2.fxml"));
+             stage.setScene(new Scene(scene));
+             stage.centerOnScreen();
+             stage.show();
+
+             boolean apptStatus = false;
+             for (Appointment a : userAppointments) {
+                 LocalDateTime start = a.getAppointmentStart();
+                 if(start.isAfter(currentTime) || start.isEqual(currentTime15Min) && (start.isBefore(currentTime15Min) || start.isEqual(currentTime))) {
+                     Alert alert = new Alert(Alert.AlertType.WARNING, "There are current appointments within 15 minutes");
+                     alert.showAndWait();
+                     apptStatus = true;
+                 }
+             }
+             if(!apptStatus) {
+                 Alert alert = new Alert(Alert.AlertType.WARNING, "There are no appointments starting within 15 minutes");
+                 alert.showAndWait();
+             }
+         }
+    }
+
+
+    public void onActionExit(ActionEvent actionEvent) {
+        //Alert alert = new Alert(Alert.AlertType.WARNING, rb.getString("Cancel"));
+
     }
 }
