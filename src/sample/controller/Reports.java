@@ -1,4 +1,5 @@
 package sample.controller;
 
-public class ReportsMain {
+public class Reports {
+
 }

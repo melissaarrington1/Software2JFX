@@ -139,16 +139,12 @@ public class NewAppointmentController implements Initializable {
             LocalDateTime end = LocalDateTime.of(appointmentEndDate.getValue(), appointmentEndTimeCombo.getValue());
 
             // todo: check that end is after start
-            if(Appointment.checkOverlapAppt(customerId, start, end)) {
+            if(Appointment.checkOverlapAppt(0, customerId, start, end)) {
                 System.out.println("appointment overlapping. ");
                 Alert alert = new Alert(Alert.AlertType.ERROR, "There is already an existing appointment for this time slot. Please choose another time slot.");
                 alert.showAndWait();
                 return;
             }
-
-            //todo: check for appointment overlap
-            //todo check if end time is before start. if
-
 
             AppointmentQuery.addAppointment(appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, contactId, customerId, userId, start, end);
 

@@ -2,6 +2,8 @@ package sample.model;
 
 import java.time.LocalDateTime;
 
+import com.sun.javafx.collections.ObservableListWrapper;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import sample.DB.AppointmentQuery;
@@ -124,29 +126,51 @@ public class Appointment {
         this.appointmentEnd = appointmentEnd;
     }
 
-    public static boolean checkOverlapAppt(int customerId, LocalDateTime appointmentStart, LocalDateTime appointmentEnd) {
+    public static boolean checkOverlapAppt(int appointmentId, int customerId, LocalDateTime start, LocalDateTime end) {
         ObservableList<Appointment> appointments = AppointmentQuery.getAppointmentList();
-        LocalDateTime start;
-        LocalDateTime end;
+        ObservableList<Appointment> customerAppointments = FXCollections.observableArrayList();
 
-        for(Appointment a : appointments) {
-            if(a.getAppointmentStart().isEqual(appointmentStart)) {
+        /**
+         * Lambda Function for filtering through customer appointments by Id
+         */
+        customerAppointments = appointments.filtered(apt -> {
+            if(apt.getCustomerId() == customerId && apt.getAppointmentId() != appointmentId) {
+                return true;
+            }
+            return false;
+        });
+
+
+        for(Appointment a : customerAppointments) {
+            System.out.println(a.getAppointmentStart());
+            System.out.println(start);
+            System.out.println(a.getAppointmentEnd());
+            System.out.println(end);
+
+            // a.start > start && a.start < end
+            if (a.getAppointmentStart().isAfter(start) && a.getAppointmentStart().isBefore(end)) {
+                return true;
+            }
+            // a.end > start && a.end < end
+            if (a.getAppointmentEnd().isAfter(start) && a.getAppointmentEnd().isBefore(end)) {
                 return true;
             }
 
-            if((a.getAppointmentStart().isAfter(appointmentStart) || a.getAppointmentStart().isEqual(appointmentStart)) && a.getAppointmentStart().isBefore(appointmentEnd)) {
 
+            // a. start < start && a.end > end
+            if(a.getAppointmentStart().isBefore(start) && a.getAppointmentEnd().isAfter(end)) {
                 return true;
             }
-
-         else if(a.getAppointmentEnd().isAfter(appointmentStart) && (a.getAppointmentEnd().isBefore(appointmentEnd) || a.getAppointmentEnd().isEqual(appointmentEnd))) {
-            return true;
-        }
-        else if((a.getAppointmentStart().isBefore(appointmentStart) || a.getAppointmentStart().isEqual(appointmentStart)) && (a.getAppointmentEnd().isAfter(appointmentEnd) || a.getAppointmentEnd().isEqual(appointmentEnd))) {
-            return true;
-        }
-
+            // a.start == start
+            if(a.getAppointmentStart().isEqual(start)) {
+                return true;
+            }
+            // a.end == end
+            if(a.getAppointmentEnd().isEqual(end)) {
+                return true;
+            }
         }
         return false;
     }
+
 }

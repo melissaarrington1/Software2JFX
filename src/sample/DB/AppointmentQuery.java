@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import sample.model.Appointment;
 import sample.model.Customer;
+import java.sql.Timestamp;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -54,8 +55,8 @@ public class AppointmentQuery {
         ps.setInt(5, contactId);
         ps.setInt(6, customerId);
         ps.setInt(7, userId);
-        ps.setString(8, String.valueOf(appointmentStart));
-        ps.setString(9, String.valueOf(appointmentEnd));
+        ps.setTimestamp(8, Timestamp.valueOf(appointmentStart));
+        ps.setTimestamp(9, Timestamp.valueOf(appointmentEnd));
         ps.executeUpdate();
     }
 
@@ -71,8 +72,8 @@ public class AppointmentQuery {
             updateAppointment.setInt(5, contactId);
             updateAppointment.setInt(6, customerId);
             updateAppointment.setInt(7, userId);
-            updateAppointment.setString(8, String.valueOf(appointmentStart));
-            updateAppointment.setString(9, String.valueOf(appointmentEnd));
+            updateAppointment.setTimestamp(8, Timestamp.valueOf(appointmentStart));
+            updateAppointment.setTimestamp(9, Timestamp.valueOf(appointmentEnd));
             updateAppointment.setInt(10, appointmentId);
             updateAppointment.executeUpdate();
         } catch (Exception e) {

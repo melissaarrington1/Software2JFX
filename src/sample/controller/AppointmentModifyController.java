@@ -132,6 +132,14 @@ public class AppointmentModifyController implements Initializable {
             LocalDateTime start = LocalDateTime.of(appointmentStartDate.getValue(), appointmentStartTimeCombo.getValue());
             LocalDateTime end = LocalDateTime.of(appointmentEndDate.getValue(), appointmentEndTimeCombo.getValue());
 
+
+            if(Appointment.checkOverlapAppt(appointmentId, customerId, start, end)) {
+                System.out.println("appointment overlapping. ");
+                Alert alert = new Alert(Alert.AlertType.ERROR, "There is already an existing appointment for this time slot. Please choose another time slot.");
+                alert.showAndWait();
+                return;
+            }
+
             AppointmentQuery.updateAppointment(appointmentId, appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, contactId, customerId, userId, start, end);
         } catch (Exception e) {
             e.printStackTrace();
