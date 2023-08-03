@@ -156,6 +156,11 @@ public class AppointmentQuery {
         return monthly;
     }
 
+    /**
+     * SQL Query to get all appointments for users during login
+     * @param userId
+     * @return userAppointments
+     */
     public static ObservableList<Appointment> getUserAppointments(int userId) {
         ObservableList<Appointment> userAppointments = FXCollections.observableArrayList();
         try {
@@ -181,5 +186,30 @@ public class AppointmentQuery {
             throw new RuntimeException(e);
         }
         return userAppointments;
+    }
+
+    public static ObservableList<Appointment> getContactAppointments(int contactId) {
+        ObservableList<Appointment> contactAppointment = FXCollections.observableArrayList();
+        try {
+            String sql = "SELECT * FROM appointments JOIN contacts ON appointments.Contact_ID = contacts.Contact_ID WHERE appointments.Contact_ID  = '" + contactId + "'";
+            PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int appointmentId = rs.getInt("Appointment_ID");
+                String appointmentTitle = rs.getString("Title");
+                String appointmentDescription = rs.getString("Description");
+                String appointmentType = rs.getString("Type");
+                String appointmentLocation = rs.getString("Location");
+                int appointmentUserId = rs.getInt("User_ID");
+                LocalDateTime appointmentStart = rs.getTimestamp("Start").toLocalDateTime();
+                LocalDateTime appointmentEnd = rs.getTimestamp("End").toLocalDateTime();
+                int customerId = rs.getInt("Customer_ID");
+                Appointment a = new Appointment(appointmentId, appointmentTitle, appointmentDescription, appointmentType, appointmentLocation, contactId, customerId, appointmentUserId, appointmentStart, appointmentEnd);
+                contactAppointment.add(a);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return contactAppointment;
     }
 }

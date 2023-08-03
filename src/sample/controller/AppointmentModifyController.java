@@ -52,6 +52,11 @@ public class AppointmentModifyController implements Initializable {
 
     public Appointment selectedAppointment;
 
+    /**
+     * Initializes the fields with the existing appointment info
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         appointmentContactCombo.setItems(ContactQuery.getAllContacts());
@@ -61,6 +66,11 @@ public class AppointmentModifyController implements Initializable {
         appointmentEndTimeCombo.setItems(TimeHelper.getEndTimes());
     }
 
+    /**
+     * Method to send info for an existing appointment to modify it.
+     * Includes error handling to if update is not successful
+     * @param appointment
+     */
     public void appointmentInfo(Appointment appointment) {
         try {
             selectedAppointment = appointment;
@@ -86,14 +96,10 @@ public class AppointmentModifyController implements Initializable {
                 }
             }
 
-
-
             appointmentStartDate.setValue(selectedAppointment.getAppointmentStart().toLocalDate());
             appointmentStartTimeCombo.setValue(selectedAppointment.getAppointmentStart().toLocalTime());
-
-
-
-
+            appointmentEndDate.setValue(selectedAppointment.getAppointmentEnd().toLocalDate());
+            appointmentEndTimeCombo.setValue(selectedAppointment.getAppointmentEnd().toLocalTime());
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -145,14 +151,19 @@ public class AppointmentModifyController implements Initializable {
             e.printStackTrace();
         }
         stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/sample/views/Appointments_Main.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/sample/views/Appointments_Main2.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
 
+    /**
+     * Cancels without modifying an appointment, sends back to main Appointments screen
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onActionCancel(ActionEvent actionEvent) throws IOException {
         stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/sample/views/Customers_Main.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/sample/views/Appointments_Main2.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }

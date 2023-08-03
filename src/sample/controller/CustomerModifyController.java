@@ -44,7 +44,7 @@ public class CustomerModifyController implements Initializable {
     private ComboBox<Country> customerCountryCombo;
 
     public Customer selectedCustomer;
-    public int selectedIndex;
+
 
     /**
      * Method used to Initialize the list of countries
@@ -53,11 +53,6 @@ public class CustomerModifyController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
-        // customerCountryCombo.getValue();
-        //customerDivisionCombo.getValue();
-        //System.out.println(selectedCustomer.getName());
         System.out.println(customerNameField.getText());
     }
 
@@ -71,11 +66,16 @@ public class CustomerModifyController implements Initializable {
     public void onActionCancel(ActionEvent event) throws IOException {
         System.out.println("cancel modifying customer button clicked");
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/sample/views/Customers_Main.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/sample/views/Appointments_Main2.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
 
+    /**
+     * Method that takes in all of the updated customer info and saves it.
+     * Includes error handling if updating a customer is not successful.
+     * @param event
+     */
     public void onActionSaveCustomer(ActionEvent event) {
         try {
             int customerId = Integer.parseInt(customerIDField.getText());
@@ -91,7 +91,7 @@ public class CustomerModifyController implements Initializable {
             CustomerQuery.updateCustomer(customerName, customerAddress, customerPostalCode, customerPhone, customerDivision, customerId);
             System.out.println("Saved");
             stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-            scene = FXMLLoader.load(getClass().getResource("/sample/views/Appointments_Main.fxml"));
+            scene = FXMLLoader.load(getClass().getResource("/sample/views/Appointments_Main2.fxml"));
             stage.setScene(new Scene(scene));
             stage.show();
         } catch (Exception e) {
@@ -102,6 +102,10 @@ public class CustomerModifyController implements Initializable {
 
     }
 
+    /**
+     * Method that loads an existing customer country and can update the country
+     * @param actionEvent
+     */
     public void onActionCountryChange(ActionEvent actionEvent) {
         Country C = customerCountryCombo.getValue();
 
@@ -109,6 +113,11 @@ public class CustomerModifyController implements Initializable {
 
     }
 
+    /**
+     * Method for sending customer info over to the Modify customer screen.
+     * @param customer
+     * @throws SQLException
+     */
     public void customerInfo(Customer customer) throws SQLException {
         try{
             selectedCustomer = customer;
@@ -125,8 +134,6 @@ public class CustomerModifyController implements Initializable {
         catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
-
 
     }
 

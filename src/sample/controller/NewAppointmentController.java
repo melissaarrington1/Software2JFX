@@ -63,11 +63,16 @@ public class NewAppointmentController implements Initializable {
     public void onActionCancel(ActionEvent event) throws IOException {
         System.out.println("create appointment button clicked");
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/sample/views/Appointments_Main.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/sample/views/Appointments_Main2.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
 
+    /**
+     * Method for initializing the ComboBox lists with information for creating an appointment.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -79,7 +84,14 @@ public class NewAppointmentController implements Initializable {
         appointmentEndTimeCombo.setItems(TimeHelper.getEndTimes());
     }
 
-
+    /**
+     * Method for saving a new appointment after filling out all required fields.
+     * Calls method to check for an existing appointment.
+     * Calls method to check for an overlapping appointment.
+     * Included error handling if an appointment cannot be created.
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onActionSaveAppointment(ActionEvent actionEvent) throws IOException {
         try {
             String appointmentTitle = appointmentTitleField.getText();

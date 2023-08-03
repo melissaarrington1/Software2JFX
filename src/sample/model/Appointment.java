@@ -46,6 +46,9 @@ public class Appointment {
         this.appointmentLocation = appointmentLocation;
     }
 
+    public Appointment(int appointmentId, String appointmentTitle, String appointmentType, String appointmentDescription, LocalDateTime appointmentStart, LocalDateTime appointmentEnd, int customerId) {
+    }
+
     public int getAppointmentId() {
         return appointmentId;
     }
@@ -155,7 +158,6 @@ public class Appointment {
             if (a.getAppointmentEnd().isAfter(start) && a.getAppointmentEnd().isBefore(end)) {
                 return true;
             }
-
 
             // a. start < start && a.end > end
             if(a.getAppointmentStart().isBefore(start) && a.getAppointmentEnd().isAfter(end)) {

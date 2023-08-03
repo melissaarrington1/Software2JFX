@@ -12,9 +12,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import sample.DB.AppointmentQuery;
+import sample.DB.ContactQuery;
 import sample.DB.CustomerQuery;
+import sample.DB.ReportQuery;
 import sample.model.Appointment;
 import sample.model.Customer;
+import sample.model.ReportItem;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,6 +36,29 @@ public class AppointmentsMainController2 implements Initializable {
     public TableColumn customerPhoneCol;
     public TableColumn customerCountryCol;
     public TableColumn customerStateCol;
+
+    //contacts table
+    public TableView<Appointment> apptContactTable;
+    public ComboBox contactCombo;
+    public TableColumn apptIdCol;
+    public TableColumn apptTitleCol;
+    public TableColumn apptType1Col;
+    public TableColumn apptDescCol;
+    public TableColumn apptStartCol;
+    public TableColumn apptEndCol;
+    public TableColumn apptCustIdCol;
+
+    //country total table
+    public TableView<ReportItem> countryTotalTable;
+    public TableColumn apptCountryCol;
+    public TableColumn totalCountryCol;
+
+    //appt totals table
+    public TableView<ReportItem> monthTypeTable;
+    public TableColumn apptTypeCol;
+    public TableColumn apptMonthCol;
+    public TableColumn apptTotalCol;
+
     Stage stage;
     Parent scene;
 
@@ -76,9 +102,6 @@ public class AppointmentsMainController2 implements Initializable {
 
     @FXML
     void onActionCreateAppointment(ActionEvent event) throws IOException {
-
-
-
         System.out.println("create appointment button clicked");
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/sample/views/New_Appointment.fxml"));
@@ -115,6 +138,7 @@ public class AppointmentsMainController2 implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //APPOINTMENTS TAB
         appointmentIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         appointmentTitleCol.setCellValueFactory(new PropertyValueFactory<>("appointmentTitle"));
         appointmentDescCol.setCellValueFactory(new PropertyValueFactory<>("appointmentDescription"));
@@ -126,6 +150,7 @@ public class AppointmentsMainController2 implements Initializable {
         appointmentStartCol.setCellValueFactory(new PropertyValueFactory<>("appointmentStart"));
         appointmentEndCol.setCellValueFactory(new PropertyValueFactory<>("appointmentEnd"));
 
+        //CUSTOMERS TAB
         customerIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         customerNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         customerAddressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
@@ -134,8 +159,51 @@ public class AppointmentsMainController2 implements Initializable {
         customerCountryCol.setCellValueFactory(new PropertyValueFactory<>("countries"));
         customerStateCol.setCellValueFactory(new PropertyValueFactory<>("division"));
 
-        loadAppointmentsTab();
+        //REPORTS TAB
 
+        //appointment by Month, selecting a contact & totals for specified user
+        monthTypeTable.setPlaceholder(new Label("Please select a user."));
+        monthTypeTable.setItems(ReportQuery.getAppointmentTypeMonthReport());
+        apptTypeCol.setCellValueFactory(new PropertyValueFactory<>("apptType"));
+        apptMonthCol.setCellValueFactory(new PropertyValueFactory<>("apptMonth"));
+        apptTotalCol.setCellValueFactory(new PropertyValueFactory<>("apptTotal"));
+
+        //country and total appointments by country
+        countryTotalTable.setItems(ReportQuery.getCountryTotalReport());
+        apptCountryCol.setCellValueFactory(new PropertyValueFactory<>("apptType"));
+        totalCountryCol.setCellValueFactory(new PropertyValueFactory<>("apptTotal"));
+
+        //View Appointments By Contact
+        contactCombo.setItems(ContactQuery.getAllContacts());
+        apptContactTable.setPlaceholder(new Label("Please select a contact to view their appointments"));
+        apptIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
+        apptTitleCol.setCellValueFactory(new PropertyValueFactory<>("appointmentTitle"));
+        apptType1Col.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
+        apptDescCol.setCellValueFactory(new PropertyValueFactory<>("appointmentDescription"));
+        apptStartCol.setCellValueFactory(new PropertyValueFactory<>("appointmentStart"));
+        apptEndCol.setCellValueFactory(new PropertyValueFactory<>("appointmentEnd"));
+        apptCustIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+
+
+        loadAppointmentsTab();
+        loadReportsTab();
+
+    }
+
+    public void contactAppointmentTable(ActionEvent actionEvent) throws SQLException {
+        //takes in a CONTACT name and converts to contact id to ge all their appointments
+        String contactName = String.valueOf(contactCombo.getValue());
+        int contactId = ContactQuery.getContactId(contactName);
+        if(AppointmentQuery.getContactAppointments(contactId).isEmpty()) {
+            apptContactTable.setPlaceholder(new Label(contactName + " has no appointments"));
+            apptContactTable.refresh();
+            for (int i = 0; i < apptContactTable.getItems().size(); i++) {
+                apptContactTable.getItems().clear();
+                apptContactTable.setPlaceholder(new Label(contactName + " has no appointments."));
+            }
+        } else {
+            apptContactTable.setItems(AppointmentQuery.getContactAppointments(contactId));
+        }
     }
 
     public void onActionDeleteAppointment(ActionEvent actionEvent) throws SQLException {
@@ -285,6 +353,28 @@ public class AppointmentsMainController2 implements Initializable {
         loadAppointmentsTab();
     }
 
+    private void loadReportsTab() {
+
+    }
+    public void onReportsTab(Event event) {
+        loadReportsTab();
+    }
+
+    public void contactList(ActionEvent actionEvent) throws SQLException {
+        String name = String.valueOf(contactCombo.getValue());
+        int contactId = ContactQuery.getContactId(name);
+        if(AppointmentQuery.getContactAppointments(contactId).isEmpty()) {
+            apptContactTable.setPlaceholder(new Label(name + " has no appointments."));
+            apptContactTable.refresh();
+            for(int i = 0; i < apptContactTable.getItems().size(); i++) {
+                apptContactTable.getItems().clear();
+                apptContactTable.setPlaceholder(new Label(name + " has no appointments."));
+            }
+        } else {
+            apptContactTable.setItems(AppointmentQuery.getContactAppointments(contactId));
+        }
+    }
+
     /**
      * Method for logging out of application. Sends you back to the login screen.
      * @param event
@@ -302,5 +392,12 @@ public class AppointmentsMainController2 implements Initializable {
             stage.show();
         }
 
+    }
+
+    public void backToAppointments(ActionEvent event) throws IOException {
+        stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/sample/views/Appointments_Main2.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 }

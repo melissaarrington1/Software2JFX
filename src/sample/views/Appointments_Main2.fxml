@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -9,39 +10,46 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="387.0" prefWidth="880.0" style="-fx-background-color: #edf5ee;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.AppointmentsMainController2">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="618.0" prefWidth="880.0" style="-fx-background-color: #edf5ee;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.AppointmentsMainController2">
    <children>
-      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="507.0" prefWidth="880.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="appointmentTab" onSelectionChanged="#onAppointmentsTab" text="Appointments">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="385.0" prefWidth="820.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="587.0" prefWidth="880.0">
                      <children>
-                        <TableView fx:id="mainAppointmentsTable" layoutX="13.0" layoutY="49.0" prefHeight="200.0" prefWidth="854.0">
+                        <TableView fx:id="mainAppointmentsTable" layoutX="13.0" layoutY="141.0" prefHeight="200.0" prefWidth="854.0">
                           <columns>
-                            <TableColumn fx:id="appointmentIdCol" prefWidth="108.0" text="Appointment ID" />
-                            <TableColumn fx:id="appointmentTitleCol" prefWidth="42.0" text="Title" />
-                              <TableColumn fx:id="appointmentDescCol" prefWidth="159.0" text="Description" />
-                              <TableColumn fx:id="appointmentLocationCol" prefWidth="87.0" text="Location" />
-                              <TableColumn fx:id="appointmentContactCol" prefWidth="129.0" text="Contact ID" />
-                              <TableColumn fx:id="appointmentTypeCol" prefWidth="52.0" text="Type" />
-                              <TableColumn fx:id="appointmentStartCol" prefWidth="76.0" text="Start Date" />
-                              <TableColumn fx:id="appointmentEndCol" prefWidth="65.0" text="End Date" />
+                            <TableColumn fx:id="appointmentIdCol" prefWidth="24.0" text="ID" />
+                            <TableColumn fx:id="appointmentTitleCol" minWidth="8.0" prefWidth="97.0" text="Title" />
+                              <TableColumn fx:id="appointmentDescCol" prefWidth="121.0" text="Description" />
+                              <TableColumn fx:id="appointmentLocationCol" prefWidth="81.0" text="Location" />
+                              <TableColumn fx:id="appointmentContactCol" prefWidth="71.0" text="Contact ID" />
+                              <TableColumn fx:id="appointmentTypeCol" prefWidth="88.0" text="Type" />
+                              <TableColumn fx:id="appointmentStartCol" prefWidth="120.0" text="Start Date" />
+                              <TableColumn fx:id="appointmentEndCol" prefWidth="116.0" text="End Date" />
                               <TableColumn fx:id="appointmentCustCol" prefWidth="75.0" text="Customer ID" />
                               <TableColumn fx:id="appointmentUserCol" prefWidth="59.0" text="User ID" />
                           </columns>
                         </TableView>
-                        <Button layoutX="85.0" layoutY="262.0" mnemonicParsing="false" onAction="#onActionCreateAppointment" text="Create Appointment" />
-                        <Button layoutX="347.0" layoutY="262.0" mnemonicParsing="false" onAction="#onActionModifyAppointment" text="Modify Appointment" />
-                        <Button layoutX="616.0" layoutY="262.0" mnemonicParsing="false" onAction="#onActionDeleteAppointment" text="Delete Appointment" />
-                        <RadioButton fx:id="filterByWeek" layoutX="373.0" layoutY="15.0" mnemonicParsing="false" onAction="#onActionFilterByWeek" text="Week">
+                        <Button layoutX="85.0" layoutY="408.0" mnemonicParsing="false" onAction="#onActionCreateAppointment" text="Create Appointment" />
+                        <Button layoutX="361.0" layoutY="408.0" mnemonicParsing="false" onAction="#onActionModifyAppointment" text="Modify Appointment" />
+                        <Button layoutX="609.0" layoutY="408.0" mnemonicParsing="false" onAction="#onActionDeleteAppointment" text="Delete Appointment" />
+                        <RadioButton fx:id="filterByWeek" layoutX="399.0" layoutY="78.0" mnemonicParsing="false" onAction="#onActionFilterByWeek" text="Week">
                            <toggleGroup>
                               <ToggleGroup fx:id="appointmentToggleGroup" />
                            </toggleGroup></RadioButton>
-                        <RadioButton fx:id="filterByMonth" layoutX="588.0" layoutY="15.0" mnemonicParsing="false" onAction="#onActionFilterByMonth" text="Month" toggleGroup="$appointmentToggleGroup" />
-                        <RadioButton fx:id="filterAll" layoutX="174.0" layoutY="15.0" mnemonicParsing="false" onAction="#onActionFilterAll" selected="true" text="All" toggleGroup="$appointmentToggleGroup" />
-                        <Button fx:id="logOut" layoutX="794.0" layoutY="319.0" mnemonicParsing="false" onAction="#onActionLogOut" text="Log Out" />
+                        <RadioButton fx:id="filterByMonth" layoutX="603.0" layoutY="78.0" mnemonicParsing="false" onAction="#onActionFilterByMonth" text="Month" toggleGroup="$appointmentToggleGroup" />
+                        <RadioButton fx:id="filterAll" layoutX="174.0" layoutY="86.0" mnemonicParsing="false" onAction="#onActionFilterAll" selected="true" text="All" toggleGroup="$appointmentToggleGroup" />
+                        <Button fx:id="logOut" layoutX="794.0" layoutY="501.0" mnemonicParsing="false" onAction="#onActionLogOut" text="Log Out" />
+                        <Text layoutX="23.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointments" wrappingWidth="123.13671875">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
                      </children>
                   </AnchorPane>
             </content>
@@ -50,7 +58,7 @@
                 <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="407.0" prefWidth="818.0">
                         <children>
-                            <TableView fx:id="mainCustomerTable" layoutX="68.0" layoutY="31.0" prefHeight="200.0" prefWidth="745.0">
+                            <TableView fx:id="mainCustomerTable" layoutX="68.0" layoutY="96.0" prefHeight="200.0" prefWidth="745.0">
                                 <columns>
                                     <TableColumn fx:id="customerIdCol" prefWidth="85.0" text="Customer ID" />
                                     <TableColumn fx:id="customerNameCol" prefWidth="132.0" text="Customer Name" />
@@ -61,16 +69,67 @@
                                     <TableColumn fx:id="customerStateCol" minWidth="0.0" prefWidth="97.0" text="State Province" />
                                 </columns>
                             </TableView>
-                            <Button layoutX="115.0" layoutY="249.0" mnemonicParsing="false" onAction="#onActionCreateCustomer" text="Create Customer" />
-                            <Button layoutX="387.0" layoutY="249.0" mnemonicParsing="false" onAction="#onActionModifyCustomer" text="Modify Customer" />
-                            <Button layoutX="655.0" layoutY="249.0" mnemonicParsing="false" onAction="#onActionDeleteCustomer" text="Delete Customer" />
+                            <Button layoutX="115.0" layoutY="333.0" mnemonicParsing="false" onAction="#onActionCreateCustomer" text="Create Customer" />
+                            <Button layoutX="386.0" layoutY="333.0" mnemonicParsing="false" onAction="#onActionModifyCustomer" text="Modify Customer" />
+                            <Button layoutX="655.0" layoutY="333.0" mnemonicParsing="false" onAction="#onActionDeleteCustomer" text="Delete Customer" />
+                        <Text layoutX="68.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customers" wrappingWidth="123.13671875">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                        <Button layoutX="353.0" layoutY="505.0" mnemonicParsing="false" onAction="#backToAppointments" prefHeight="25.0" prefWidth="175.0" text="Back to Appointments" />
                         </children>
                     </AnchorPane>
                 </content>
             </Tab>
-            <Tab fx:id="reportsTab" text="Reports">
+            <Tab fx:id="reportsTab" closable="false" onSelectionChanged="#onReportsTab" text="Reports">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                 
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="402.0" prefWidth="880.0">
+                  <TableView fx:id="monthTypeTable" layoutX="14.0" layoutY="57.0" prefHeight="160.0" prefWidth="386.0">
+                      <columns>
+                          <TableColumn fx:id="apptTypeCol" prefWidth="136.0" text="Appointment Type" />
+                          <TableColumn fx:id="apptMonthCol" minWidth="0.0" prefWidth="162.0" text="Month" />
+                          <TableColumn fx:id="apptTotalCol" minWidth="0.0" prefWidth="87.0" text="Total" />
+                      </columns>
+                  </TableView>
+                  <TableView fx:id="countryTotalTable" layoutX="484.0" layoutY="58.0" prefHeight="158.0" prefWidth="376.0">
+                      <columns>
+                          <TableColumn fx:id="apptCountryCol" prefWidth="193.0" text="Country" />
+                          <TableColumn fx:id="totalCountryCol" prefWidth="182.0" text="Total Customers" />
+                      </columns>
+                  </TableView>
+                  <Text layoutX="21.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointment Totals">
+                      <font>
+                          <Font size="15.0" />
+                      </font>
+                  </Text>
+                     <ComboBox fx:id="contactCombo" layoutX="107.0" layoutY="298.0" onAction="#contactAppointmentTable" prefWidth="150.0" />
+                     <Text layoutX="21.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Contact:" wrappingWidth="86.36328125" />
+                     <TableView fx:id="apptContactTable" layoutX="21.0" layoutY="332.0" prefHeight="160.0" prefWidth="839.0">
+                        <columns>
+                           <TableColumn fx:id="apptIdCol" prefWidth="47.0" text="ID" />
+                           <TableColumn fx:id="apptTitleCol" minWidth="0.0" prefWidth="89.0" text="Title" />
+                           <TableColumn fx:id="apptType1Col" minWidth="0.0" prefWidth="106.0" text="Type" />
+                           <TableColumn fx:id="apptDescCol" minWidth="0.0" prefWidth="132.0" text="Description" />
+                           <TableColumn fx:id="apptStartCol" minWidth="0.0" prefWidth="191.0" text="Start" />
+                           <TableColumn fx:id="apptEndCol" minWidth="0.0" prefWidth="184.0" text="End" />
+                           <TableColumn fx:id="apptCustIdCol" minWidth="0.0" prefWidth="89.0" text="Customer ID" />
+                        </columns>
+                     </TableView>
+                     <Text layoutX="21.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Schedule By Contact">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Text>
+                     <Text layoutX="484.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Country Totals">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Text>
+                     <Button layoutX="353.0" layoutY="521.0" mnemonicParsing="false" onAction="#backToAppointments" prefHeight="25.0" prefWidth="175.0" text="Back to Appointments" />
+
+                  </AnchorPane>
               </content>
             </Tab>
         </tabs>
