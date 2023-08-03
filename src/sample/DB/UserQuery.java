@@ -39,8 +39,10 @@ public class UserQuery {
         try {
             String sql = "SELECT * FROM Users WHERE BINARY User_Name = ? AND  Password = ?";
             PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+
             ps.setString(1, username);
             ps.setString(2, password);
+            System.out.println(ps);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 return true;
@@ -53,11 +55,12 @@ public class UserQuery {
 
     public static int getUserId(String username) throws SQLException {
         int userId = 0;
-        String sqlStatement = "select User_ID, User_Name from users where User_Name = '" + username + "'";
+        String sqlStatement = "select User_ID, User_Name from users where User_Name = ?";
         PreparedStatement ps = JDBC.connection.prepareStatement(sqlStatement);
+        ps.setString(1, username);
         ResultSet rs = ps.executeQuery();
 
-        while (rs.next()) {
+        if (rs.next()) {
             userId = rs.getInt("User_ID");
             username = rs.getString("User_Name");
         }

@@ -58,9 +58,7 @@ public class Login implements Initializable {
 
 
 
-    LocalDateTime currentTime = LocalDateTime.now();
-    ZonedDateTime conversionUTC = currentTime.atZone(ZoneId.systemDefault());
-    LocalDateTime currentTime15Min = LocalDateTime.now().plusMinutes(15);
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -108,32 +106,42 @@ public class Login implements Initializable {
             alert.showAndWait();
             return;
         }
-
          else {
              int userId = getUserId(username);
-
+             System.out.println("userId = " + userId + " username = " + username + ".");
              ObservableList<Appointment> userAppointments = AppointmentQuery.getUserAppointments(userId);
+             System.out.println("number of appt retreived = " + userAppointments.size());
+             LocalDateTime currentTime = LocalDateTime.now();
+             ZonedDateTime conversionUTC = currentTime.atZone(ZoneId.systemDefault());
+             LocalDateTime currentTime15Min = LocalDateTime.now().plusMinutes(15);
 
+             boolean apptStatus = false;
+             for (Appointment a : userAppointments) {
+                 LocalDateTime start = a.getAppointmentStart();
+                 System.out.println("current time = " + currentTime);
+                 System.out.println("appt time = " + start);
+                 System.out.println("current time 15 = " + currentTime15Min + "\n");
+                 if (!(start.isBefore(currentTime) || start.isAfter(currentTime15Min))) {
+                     Alert alert = new Alert(Alert.AlertType.WARNING, "There are current appointments within 15 minutes: id= " + a.getAppointmentId() + " at " + a.getAppointmentStart());
+                     alert.showAndWait();
+                     apptStatus = true;
+                 }
+//                 if((start.isAfter(currentTime) || start.isEqual(currentTime)) && ((start.isBefore(currentTime15Min) || start.isEqual(currentTime15Min)))) {
+//                     Alert alert = new Alert(Alert.AlertType.WARNING, "There are current appointments within 15 minutes: id= " + a.getAppointmentId() + " at " + a.getAppointmentStart());
+//                     alert.showAndWait();
+//                     apptStatus = true;
+//                 }
+             }
+            if(!apptStatus) {
+                 Alert alert = new Alert(Alert.AlertType.WARNING, "There are no appointments starting within 15 minutes");
+                 alert.showAndWait();
+             }
              System.out.println("login button clicked");
              stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
              scene = FXMLLoader.load(getClass().getResource("/sample/views/Appointments_Main2.fxml"));
              stage.setScene(new Scene(scene));
              stage.centerOnScreen();
              stage.show();
-
-             boolean apptStatus = false;
-             for (Appointment a : userAppointments) {
-                 LocalDateTime start = a.getAppointmentStart();
-                 if(start.isAfter(currentTime) || start.isEqual(currentTime15Min) && (start.isBefore(currentTime15Min) || start.isEqual(currentTime))) {
-                     Alert alert = new Alert(Alert.AlertType.WARNING, "There are current appointments within 15 minutes");
-                     alert.showAndWait();
-                     apptStatus = true;
-                 }
-             }
-             if(!apptStatus) {
-                 Alert alert = new Alert(Alert.AlertType.WARNING, "There are no appointments starting within 15 minutes");
-                 alert.showAndWait();
-             }
          }
     }
 
