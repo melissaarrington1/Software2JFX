@@ -38,9 +38,4 @@ public class Reports {
 apptTotalTable.setPlaceholder(new Label("Please select info."));
     }
 
-
-
-
-
-
 }

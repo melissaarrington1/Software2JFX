@@ -8,6 +8,9 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import sample.DB.AppointmentQuery;
 
+/**
+ * Appointments Model
+ */
 public class Appointment {
     private int appointmentId;
     private String appointmentTitle;
@@ -21,7 +24,7 @@ public class Appointment {
     private LocalDateTime appointmentEnd;
 
     /**
-     *
+     * Appointments constructor
      * @param appointmentId
      * @param appointmentTitle
      * @param appointmentDescription
@@ -49,86 +52,158 @@ public class Appointment {
     public Appointment(int appointmentId, String appointmentTitle, String appointmentType, String appointmentDescription, LocalDateTime appointmentStart, LocalDateTime appointmentEnd, int customerId) {
     }
 
+    /**
+     * AppointmentID Getter
+     * @return
+     */
     public int getAppointmentId() {
         return appointmentId;
     }
 
+    /**
+     * AppointmentID Setter
+     * @return
+     */
     public void setAppointmentId(int appointmentId) {
         this.appointmentId = appointmentId;
     }
-
+    /**
+     * Appointment Title Getter
+     * @return
+     */
     public String getAppointmentTitle() {
         return appointmentTitle;
     }
-
+    /**
+     * Appointment Title Setter
+     * @return
+     */
     public void setAppointmentTitle(String appointmentTitle) {
         this.appointmentTitle = appointmentTitle;
     }
-
+    /**
+     * Appointment Description Getter
+     * @return
+     */
     public String getAppointmentDescription() {
         return appointmentDescription;
     }
-
+    /**
+     * Appointment Description Setter
+     * @return
+     */
     public void setAppointmentDescription(String appointmentDescription) {
         this.appointmentDescription = appointmentDescription;
     }
 
+    /**
+     * Appointment Type Getter
+     * @return
+     */
     public String getAppointmentType() {
         return appointmentType;
     }
-
+    /**
+     * Appointment Type Setter
+     * @return
+     */
     public void setAppointmentType(String appointmentType) {
         this.appointmentType = appointmentType;
     }
-
+    /**
+     * Appointment Location Getter
+     * @return
+     */
     public String getAppointmentLocation() {
         return appointmentLocation;
     }
-
+    /**
+     * Appointment Location Setter
+     * @return
+     */
     public void setAppointmentLocation(String appointmentLocation) {
         this.appointmentLocation = appointmentLocation;
     }
 
+    /**
+     * Appointment Contact Getter
+     * @return
+     */
     public int getAppointmentContact() {
         return appointmentContact;
     }
-
+    /**
+     * Appointment Contact Setter
+     * @return
+     */
     public void setAppointmentContact(int appointmentContact) {
         this.appointmentContact = appointmentContact;
     }
-
+    /**
+     * Appointment Customer ID Getter
+     * @return
+     */
     public int getCustomerId() {
         return customerId;
     }
-
+    /**
+     * Appointment Customer ID Setter
+     * @return
+     */
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
-
+    /**
+     * Appointment User ID Getter
+     * @return
+     */
     public int getUserId() {
         return userId;
     }
-
+    /**
+     * Appointment User ID Setter
+     * @return
+     */
     public void setUserId(int userId) {
         this.userId = userId;
     }
-
+    /**
+     * Appointment Start Time Getter
+     * @return
+     */
     public LocalDateTime getAppointmentStart() {
         return appointmentStart;
     }
-
+    /**
+     * Appointment Start Time Setter
+     * @return
+     */
     public void setAppointmentStart(LocalDateTime appointmentStart) {
         this.appointmentStart = appointmentStart;
     }
-
+    /**
+     * Appointment End Time Getter
+     * @return
+     */
     public LocalDateTime getAppointmentEnd() {
         return appointmentEnd;
     }
-
+    /**
+     * Appointment Start Time Setter
+     * @return
+     */
     public void setAppointmentEnd(LocalDateTime appointmentEnd) {
         this.appointmentEnd = appointmentEnd;
     }
 
+    /**
+     * Method for checking for overlap when creating a new appointment
+     * @param appointmentId
+     * @param customerId
+     * @param start
+     * @param end
+     * @return
+     */
     public static boolean checkOverlapAppt(int appointmentId, int customerId, LocalDateTime start, LocalDateTime end) {
         ObservableList<Appointment> appointments = AppointmentQuery.getAppointmentList();
         ObservableList<Appointment> customerAppointments = FXCollections.observableArrayList();

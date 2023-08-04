@@ -28,37 +28,6 @@ public class Customer {
     public Customer(int customerIdSearch, String customerName) {
     }
 
-//    public Customer( String name, String address, String postalCode, String phoneNumber, String createdBy, String lastUpdatedBy, int divisionID, String division, int countryId, String countries, int id) {
-//        this.id = id;
-//        this.name = name;
-//        this.address = address;
-//        this.phoneNumber = phoneNumber;
-//        this.postalCode = postalCode;
-//        this.countries = countries;
-//        this.division = division;
-//        this.createdBy = createdBy;
-//        this.lastUpdatedBy = lastUpdatedBy;
-//        this.divisionID = divisionID;
-//        this.countryId = countryId;
-//    }
-
-//    public Customer(String customerName, String customerAddress, String customerPostalCode, String customerPhone, String createdBy, String lastUpdatedBy, int customerDivisionId, String customerDivisionName, int customerCountryId, String customerCountryName, int customerID) {
-//        this.customerID = customerID;
-//        this.customerName = customerName;
-//        this.customerAddress = customerAddress;
-//        this.customerPostalCode = customerPostalCode;
-//        this.customerPhone = customerPhone;
-//        this.countries = countries;
-//        this.customerDivisionName = customerDivisionName;
-//        this.createDate = createDate;
-//        this.createdBy = createdBy;
-//        this.lastUpdate = lastUpdate;
-//        this.lastUpdatedBy = lastUpdatedBy;
-//        this.customerDivisionId = customerDivisionId;
-//        this.customerCountryId = customerCountryId;
-//    }
-
-
     public int getId() {
         return id;
     }

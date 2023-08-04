@@ -1,5 +1,9 @@
 package sample.model;
 
+/**
+ * Model class for a Report Item
+ * There are 3 Report tables
+ */
 public class ReportItem {
     String apptType;
     String apptMonth;

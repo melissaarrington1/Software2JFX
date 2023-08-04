@@ -123,6 +123,11 @@ public class NewAppointmentController implements Initializable {
 
             Contact contact = appointmentContactCombo.getValue();
             int contactId = contact.getContactId();
+            if(contact == null) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Please select a contact");
+                alert.showAndWait();
+                return;
+            }
 
             Customer customer = appointmentCustCombo.getValue();
             int customerId = customer.getId();
@@ -132,25 +137,34 @@ public class NewAppointmentController implements Initializable {
 
 
             if(contact == null) {
-                //Alert alert = new Alert(Alert.AlertType.WARNING, "Contact cannot be blank.");
-                //alert.showAndWait();
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Contact cannot be blank.");
+                alert.showAndWait();
                 return;
             }
             if(customer == null) {
-              //Alert alert = new Alert(Alert.AlertType.WARNING, "Must have a customer to make an appointment");
-                //alert.showAndWait();
+              Alert alert = new Alert(Alert.AlertType.WARNING, "Must have a customer to make an appointment");
+                alert.showAndWait();
                 return;
             }
             if(user == null) {
-               // Alert alert = new Alert(Alert.AlertType.WARNING, "Must have a user to make an appointment");
-                //alert.showAndWait();
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Must have a user to make an appointment");
+                alert.showAndWait();
                 return;
             }
 
             LocalDateTime start = LocalDateTime.of(appointmentStartDate.getValue(), appointmentStartTimeCombo.getValue());
+            if(start == null) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Please select a start date to create an appointment");
+                alert.showAndWait();
+                return;
+            }
             LocalDateTime end = LocalDateTime.of(appointmentEndDate.getValue(), appointmentEndTimeCombo.getValue());
+            if(end == null) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Please select an end date to create an appointment");
+                alert.showAndWait();
+                return;
+            }
 
-            // todo: check that end is after start
             if(Appointment.checkOverlapAppt(0, customerId, start, end)) {
                 System.out.println("appointment overlapping. ");
                 Alert alert = new Alert(Alert.AlertType.ERROR, "There is already an existing appointment for this time slot. Please choose another time slot.");

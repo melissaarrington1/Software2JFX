@@ -1,5 +1,8 @@
 package sample.model;
 
+/**
+ * Model class for a Login user
+ */
 public class User {
     private int userId;
     private String userName;

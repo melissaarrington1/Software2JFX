@@ -99,7 +99,11 @@ public class AppointmentsMainController2 implements Initializable {
     private ToggleGroup appointmentToggleGroup;
 
 
-
+    /**
+     * Method for button that takes you to New Appointment screen
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onActionCreateAppointment(ActionEvent event) throws IOException {
         System.out.println("create appointment button clicked");
@@ -109,6 +113,12 @@ public class AppointmentsMainController2 implements Initializable {
         stage.show();
     }
 
+    /**
+     * Method for button that takes you to Modify existing Appointment screen.
+     * If there is no appointment selected, an error will occur
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onActionModifyAppointment(ActionEvent event) throws IOException {
         Appointment selectedAppointment = (Appointment) mainAppointmentsTable.getSelectionModel().getSelectedItem();
@@ -136,6 +146,11 @@ public class AppointmentsMainController2 implements Initializable {
         }
     }
 
+    /**
+     * Initializes each screen of the application with the appointment, customer, or report data.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //APPOINTMENTS TAB
@@ -190,6 +205,11 @@ public class AppointmentsMainController2 implements Initializable {
 
     }
 
+    /**
+     * Method for the Reports Tab, that includes appointment data for each user
+     * @param actionEvent
+     * @throws SQLException
+     */
     public void contactAppointmentTable(ActionEvent actionEvent) throws SQLException {
         //takes in a CONTACT name and converts to contact id to ge all their appointments
         String contactName = String.valueOf(contactCombo.getValue());
@@ -206,6 +226,12 @@ public class AppointmentsMainController2 implements Initializable {
         }
     }
 
+    /**
+     * Method for deleting an existing appointment.
+     * Includes validation for deleting or not deleting an appointnent
+     * @param actionEvent
+     * @throws SQLException
+     */
     public void onActionDeleteAppointment(ActionEvent actionEvent) throws SQLException {
         ObservableList<Appointment> appointmentList = AppointmentQuery.getAppointmentList();
         Appointment appointment = mainAppointmentsTable.getSelectionModel().getSelectedItem();
@@ -225,7 +251,10 @@ public class AppointmentsMainController2 implements Initializable {
         }
     }
 
-
+    /**
+     * Method for filtering all appointments by week
+     * @param actionEvent
+     */
     public void onActionFilterByWeek(ActionEvent actionEvent) {
         if(filterByWeek.isSelected()) {
             try {
@@ -241,13 +270,20 @@ public class AppointmentsMainController2 implements Initializable {
         }
     }
 
+    /**
+     * Method for filtering all appointments by month
+     * @param actionEvent
+     */
     public void onActionFilterByMonth(ActionEvent actionEvent) {
         mainAppointmentsTable.setItems(AppointmentQuery.getMonthlyAppointments());
         mainAppointmentsTable.setPlaceholder(new Label("No appointment exists for next month!"));
     }
 
 
-
+    /**
+     * Method to reset filtering
+     * @param actionEvent
+     */
     public void onActionFilterAll(ActionEvent actionEvent) {
         mainAppointmentsTable.setItems(AppointmentQuery.getAppointmentList());
     }
@@ -302,8 +338,12 @@ public class AppointmentsMainController2 implements Initializable {
     }
 
 
-
-
+    /**
+     * Method to delete a customer.
+     * Will delete existing appointment for a customer if a customer is deleted.
+     * @param actionEvent
+     * @throws SQLException
+     */
     public void onActionDeleteCustomer(ActionEvent actionEvent) throws SQLException {
         ObservableList<Customer> customerList = CustomerQuery.getCustomerList();
 
@@ -394,6 +434,11 @@ public class AppointmentsMainController2 implements Initializable {
 
     }
 
+    /**
+     * Method for going back to the main appointments screen
+     * @param event
+     * @throws IOException
+     */
     public void backToAppointments(ActionEvent event) throws IOException {
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/sample/views/Appointments_Main2.fxml"));

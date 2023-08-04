@@ -35,6 +35,13 @@ public class UserQuery {
         return userList;
     }
 
+    /**
+     * SQL Query for getting a users login info
+     * @param username
+     * @param password
+     * @return
+     * @throws SQLException
+     */
     public static boolean userLogin(String username, String password) throws SQLException {
         try {
             String sql = "SELECT * FROM Users WHERE BINARY User_Name = ? AND  Password = ?";

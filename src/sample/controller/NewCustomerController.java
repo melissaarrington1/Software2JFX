@@ -101,7 +101,7 @@ public class NewCustomerController implements Initializable {
             Country customerCountry = customerCountryCombo.getValue();
 
             int customerDivision = customerDivisionCombo.getValue().getDivisionId();
-//            if(customerDivision.isEmpty()) {
+//            if(customerDivision == null) {
 //                Alert alert = new Alert(Alert.AlertType.WARNING, "Please enter a customer postal code!");
 //                alert.showAndWait();
 //            }

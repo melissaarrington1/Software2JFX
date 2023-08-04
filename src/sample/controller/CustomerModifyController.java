@@ -97,9 +97,7 @@ public class CustomerModifyController implements Initializable {
         } catch (Exception e) {
             System.out.println("Did not save");
             throw new RuntimeException(e);
-
         }
-
     }
 
     /**
@@ -108,9 +106,7 @@ public class CustomerModifyController implements Initializable {
      */
     public void onActionCountryChange(ActionEvent actionEvent) {
         Country C = customerCountryCombo.getValue();
-
         customerDivisionCombo.setItems(DivisionQuery.getCountryDivisions(C.getCountryId()));
-
     }
 
     /**
@@ -134,7 +130,5 @@ public class CustomerModifyController implements Initializable {
         catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
     }
-
 }

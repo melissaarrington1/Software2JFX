@@ -15,12 +15,15 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -50,16 +53,19 @@ public class Login implements Initializable {
     Button exitButton;
     @FXML
     Label title;
+
     @FXML
     private Button onActionLoginBtn;
 
     Stage stage;
     Parent scene;
 
-
-
-
-
+    /**
+     * Method that sets initial login info.
+     * Will change language from Englist to French, depending on the local of the user
+     * @param url
+     * @param rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         rb = ResourceBundle.getBundle("sample/resources/Nat", Locale.getDefault());
@@ -72,7 +78,7 @@ public class Login implements Initializable {
         passwordLabel.setText(rb.getString("password"));
         loginBtn.setText(rb.getString("login"));
         exitButton.setText(rb.getString("exit"));
-
+        title.setText(rb.getString("appointmentscheduler"));
 
         Locale france = new Locale("fr", "FR");
         Locale espanol = new Locale("es", "ES");
@@ -83,7 +89,13 @@ public class Login implements Initializable {
         System.out.println(rb.getString("hello") + " " + rb.getString("world"));
     }
 
-
+    /**
+     * Method for button that logs into application.
+     * Includes validation for username/password.
+     * @param event
+     * @throws IOException
+     * @throws SQLException
+     */
     public void onActionLoginBtn(ActionEvent event) throws IOException, SQLException {
         String username = usernameField.getText();
         String password = passwordField.getText();
@@ -102,7 +114,8 @@ public class Login implements Initializable {
          if(!userLogin(username, password)){
             int userId = getUserId(username);
             ObservableList<Appointment> userAppointments = AppointmentQuery.getUserAppointments(userId);
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Username or password is incorrect.");
+             recordLogin(false);
+             Alert alert = new Alert(Alert.AlertType.ERROR, "Username or password is incorrect.");
             alert.showAndWait();
             return;
         }
@@ -126,17 +139,13 @@ public class Login implements Initializable {
                      alert.showAndWait();
                      apptStatus = true;
                  }
-//                 if((start.isAfter(currentTime) || start.isEqual(currentTime)) && ((start.isBefore(currentTime15Min) || start.isEqual(currentTime15Min)))) {
-//                     Alert alert = new Alert(Alert.AlertType.WARNING, "There are current appointments within 15 minutes: id= " + a.getAppointmentId() + " at " + a.getAppointmentStart());
-//                     alert.showAndWait();
-//                     apptStatus = true;
-//                 }
              }
             if(!apptStatus) {
                  Alert alert = new Alert(Alert.AlertType.WARNING, "There are no appointments starting within 15 minutes");
                  alert.showAndWait();
              }
              System.out.println("login button clicked");
+            recordLogin(true);
              stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
              scene = FXMLLoader.load(getClass().getResource("/sample/views/Appointments_Main2.fxml"));
              stage.setScene(new Scene(scene));
@@ -144,10 +153,37 @@ public class Login implements Initializable {
              stage.show();
          }
     }
+    
+    /**
+     * Method for recording the dates/times that each user tries to log in.
+     * Record is user was successful or unsuccessful in logging in.
+     * @throws IOException
+     */
+    public void recordLogin(boolean loginSuccess) throws IOException {
+        LocalDateTime currentTime = LocalDateTime.now();
+        //boolean loginSuccess = false;
+        FileWriter f = new FileWriter("loginActivity.txt", true);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyy hh:mm:ss");
+        ZoneId zone = ZoneId.systemDefault();
 
+        if(loginSuccess) {
+            f.write(usernameField.getText() + "has logged in on " + formatter.format(currentTime) + "\n");
+            //return "logins.text";
+        }
+        else {
+            f.write(usernameField.getText() + "attempted to login but failed on " + formatter.format(currentTime) + "\n");
+        }
+        f.write("\n");
+        f.close();
+    }
 
+    /**
+     * Method for exiting applications
+     * @param actionEvent
+     */
     public void onActionExit(ActionEvent actionEvent) {
         //Alert alert = new Alert(Alert.AlertType.WARNING, rb.getString("Cancel"));
+        stage.close();
 
     }
 }
