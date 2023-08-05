@@ -139,7 +139,7 @@ public class Login implements Initializable {
                  }
              }
             if(!apptStatus) {
-                 Alert alert = new Alert(Alert.AlertType.WARNING, "There are no appointments starting within 15 minutes");
+                 Alert alert = new Alert(Alert.AlertType.WARNING, rb.getString("apptAlert"));
                  alert.showAndWait();
              }
              System.out.println("login button clicked");
