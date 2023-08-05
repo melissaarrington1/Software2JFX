@@ -8,10 +8,7 @@ import javafx.fxml.Initializable;
 
 import javafx.scene.Scene;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 
@@ -57,12 +54,14 @@ public class Login implements Initializable {
     @FXML
     private Button onActionLoginBtn;
 
+    ResourceBundle rb = ResourceBundle.getBundle("sample/resources/Nat", Locale.getDefault());
+
     Stage stage;
     Parent scene;
 
     /**
      * Method that sets initial login info.
-     * Will change language from Englist to French, depending on the local of the user
+     * Will change language from English to French, depending on the locale of the user
      * @param url
      * @param rb
      */
@@ -72,21 +71,20 @@ public class Login implements Initializable {
         ZoneId zoneId = ZoneId.systemDefault();
         String location = ZoneId.systemDefault().toString();
         //title.setText(rb.getString("title"));
-
+        title.setText(rb.getString("appointmentscheduler"));
         langLabel.setText(location);
         usernameLabel.setText(rb.getString("username"));
         passwordLabel.setText(rb.getString("password"));
         loginBtn.setText(rb.getString("login"));
         exitButton.setText(rb.getString("exit"));
-        title.setText(rb.getString("appointmentscheduler"));
-
+        
         Locale france = new Locale("fr", "FR");
         Locale espanol = new Locale("es", "ES");
 
 
 
-        if(Locale.getDefault().getLanguage().equals("de") || Locale.getDefault().getLanguage().equals("es") || Locale.getDefault().getLanguage().equals("fr"))
-        System.out.println(rb.getString("hello") + " " + rb.getString("world"));
+//        if(Locale.getDefault().getLanguage().equals("de") || Locale.getDefault().getLanguage().equals("es") || Locale.getDefault().getLanguage().equals("fr"))
+//        System.out.println(rb.getString("hello") + " " + rb.getString("world"));
     }
 
     /**
@@ -115,8 +113,8 @@ public class Login implements Initializable {
             int userId = getUserId(username);
             ObservableList<Appointment> userAppointments = AppointmentQuery.getUserAppointments(userId);
              recordLogin(false);
-             Alert alert = new Alert(Alert.AlertType.ERROR, "Username or password is incorrect.");
-            alert.showAndWait();
+             Alert langAlert = new Alert(Alert.AlertType.ERROR, rb.getString("langAlert"));
+            langAlert.showAndWait();
             return;
         }
          else {
@@ -182,8 +180,22 @@ public class Login implements Initializable {
      * @param actionEvent
      */
     public void onActionExit(ActionEvent actionEvent) {
-        //Alert alert = new Alert(Alert.AlertType.WARNING, rb.getString("Cancel"));
-        stage.close();
+        System.out.println("exit clicked");
+        Alert alert = new Alert(Alert.AlertType.WARNING, rb.getString("exitApp"));
+        alert.getButtonTypes().clear();
+        alert.getButtonTypes().addAll(ButtonType.CANCEL, ButtonType.OK);
+        alert.showAndWait();
+        if(alert.getResult() == ButtonType.OK) {
+            System.out.println("exiting");
+            Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            stage.close();
+
+
+        }
+        else if(alert.getResult() == ButtonType.CANCEL) {
+            System.out.println("cancel");
+            alert.close();
+        }
 
     }
 }
