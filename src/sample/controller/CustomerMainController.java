@@ -20,6 +20,11 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * Customer Main Class
+ * This class shows a table of all customers
+ * @author Melissa Arrington
+ */
 public class CustomerMainController implements Initializable {
     public TableColumn customerCountryCol;
     Stage stage;

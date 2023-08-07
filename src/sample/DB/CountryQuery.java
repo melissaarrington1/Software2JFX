@@ -12,6 +12,9 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+/**
+ * SQL Query to get a list of all countries in DB
+ */
 public class CountryQuery {
     public static ObservableList<Country> getCountryList() {
         ObservableList<Country> countryList = FXCollections.observableArrayList();
@@ -22,14 +25,8 @@ public class CountryQuery {
             while (rs.next()) {
                 int countryId = rs.getInt("Country_ID");
                 String countryName = rs.getString("Country");
-//                LocalDateTime createDate = rs.getDate("Create_Date");
-//                String createdBy = rs.getString("Created_By");
-//                Timestamp lastUpdate = rs.getTimestamp("Last_Update");
-//                String lastUpdatedBy = rs.getString("Last_Updated_By");
-
                 Country c = new Country(countryId, countryName);
                 countryList.add(c);
-                System.out.println("*");
             }
         } catch (SQLException e) {
             e.printStackTrace();

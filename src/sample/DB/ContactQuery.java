@@ -7,10 +7,12 @@ import sample.model.Contact;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+/**
+ * SQL Queries for Contact
+ */
 public class ContactQuery {
     /**
-     * Read all contacts from Contact table in database
+     * SQL Query to read all contacts from Contact table in database
      *
      * @return contactList
      */
@@ -57,7 +59,7 @@ public class ContactQuery {
 
 
     /**
-     *  Getting the Contact ID for a selected Contact Name
+     *  SQL Query to get the Contact ID for a selected Contact Name
      * @param contactName
      * @return
      * @throws SQLException

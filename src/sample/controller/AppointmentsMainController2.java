@@ -26,7 +26,11 @@ import java.sql.Timestamp;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-
+/**
+ * Appointments Main Class
+ * This class shows a table to all created Appointments
+ * @author Melissa Arrington
+ */
 public class AppointmentsMainController2 implements Initializable {
     public TableView<Customer> mainCustomerTable;
     public TableColumn customerIdCol;

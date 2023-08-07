@@ -26,6 +26,11 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
+/**
+ * New Appointment Class
+ * Class for creating and saving a new appointments
+ * @author Melissa Arrington
+ */
 public class NewAppointmentController implements Initializable {
     Stage stage;
     Parent scene;

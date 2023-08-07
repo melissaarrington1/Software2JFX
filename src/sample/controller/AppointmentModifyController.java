@@ -21,6 +21,11 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
+/**
+ * Appointment Modify Class
+ * This class modifies existing appointments
+ * @author Melissa Arrington
+ */
 public class AppointmentModifyController implements Initializable {
     Stage stage;
     Parent scene;

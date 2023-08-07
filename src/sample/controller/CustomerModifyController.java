@@ -23,6 +23,10 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * Customer Modify Class
+ * @author Melissa Arrington
+ */
 public class CustomerModifyController implements Initializable {
     Stage stage;
     Parent scene;

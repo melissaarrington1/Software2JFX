@@ -62,7 +62,6 @@ public class Appointment {
 
     /**
      * AppointmentID Setter
-     * @return
      */
     public void setAppointmentId(int appointmentId) {
         this.appointmentId = appointmentId;
@@ -76,7 +75,6 @@ public class Appointment {
     }
     /**
      * Appointment Title Setter
-     * @return
      */
     public void setAppointmentTitle(String appointmentTitle) {
         this.appointmentTitle = appointmentTitle;
@@ -90,7 +88,6 @@ public class Appointment {
     }
     /**
      * Appointment Description Setter
-     * @return
      */
     public void setAppointmentDescription(String appointmentDescription) {
         this.appointmentDescription = appointmentDescription;
@@ -105,7 +102,6 @@ public class Appointment {
     }
     /**
      * Appointment Type Setter
-     * @return
      */
     public void setAppointmentType(String appointmentType) {
         this.appointmentType = appointmentType;
@@ -119,7 +115,6 @@ public class Appointment {
     }
     /**
      * Appointment Location Setter
-     * @return
      */
     public void setAppointmentLocation(String appointmentLocation) {
         this.appointmentLocation = appointmentLocation;
@@ -134,7 +129,6 @@ public class Appointment {
     }
     /**
      * Appointment Contact Setter
-     * @return
      */
     public void setAppointmentContact(int appointmentContact) {
         this.appointmentContact = appointmentContact;
@@ -148,7 +142,6 @@ public class Appointment {
     }
     /**
      * Appointment Customer ID Setter
-     * @return
      */
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
@@ -162,7 +155,6 @@ public class Appointment {
     }
     /**
      * Appointment User ID Setter
-     * @return
      */
     public void setUserId(int userId) {
         this.userId = userId;
@@ -176,7 +168,6 @@ public class Appointment {
     }
     /**
      * Appointment Start Time Setter
-     * @return
      */
     public void setAppointmentStart(LocalDateTime appointmentStart) {
         this.appointmentStart = appointmentStart;
@@ -190,7 +181,6 @@ public class Appointment {
     }
     /**
      * Appointment Start Time Setter
-     * @return
      */
     public void setAppointmentEnd(LocalDateTime appointmentEnd) {
         this.appointmentEnd = appointmentEnd;

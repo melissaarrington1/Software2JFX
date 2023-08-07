@@ -1,6 +1,6 @@
 package sample.DB;
 
-import com.mysql.cj.x.protobuf.MysqlxPrepare;
+//import com.mysql.cj.x.protobuf.MysqlxPrepare;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import sample.model.Contact;
@@ -11,10 +11,13 @@ import sample.model.Division;
 import java.sql.*;
 import java.time.LocalDateTime;
 
+/**
+ * SQL Queries for Customer
+ */
 public class CustomerQuery {
     /**
      * SQL Query to Read a list of all customers from the database
-     * @return customerList
+     * @return
      */
     public static ObservableList<Customer> getCustomerList() {
         ObservableList<Customer> customerList = FXCollections.observableArrayList();
@@ -35,7 +38,7 @@ public class CustomerQuery {
                 //                           int id, String name, String address, String phoneNumber, String postalCode, String countries, String division, String createDate, String createdBy, String lastUpdate, String lastUpdatedBy, int divisionID, int countryId)
                 Customer c = new Customer(customerId, customerName, customerAddress, customerPhone, customerPostalCode, customerCountryName, customerDivisionName, customerDivisionId, customerCountryId);
                 customerList.add(c);
-                //System.out.println("*");
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -43,21 +46,17 @@ public class CustomerQuery {
         return customerList;
     }
 
+
     /**
-     * This is SQL Query to insert a NEW customer into the Customers Table in the database
+     * SQL Query to add a new customer.
      * @param customerName
      * @param customerAddress
      * @param customerPostalCode
      * @param customerPhoneNumber
      * @param customerCountry
-     * @param
-     * @return
+     * @param customerDivision
      * @throws SQLException
      */
-
-
-
-
     public static void addCustomer(String customerName, String customerAddress, String customerPostalCode, String customerPhoneNumber, Country customerCountry, int customerDivision) throws SQLException {
 //JOIN first_level_divisions ON customers.Division_ID = first_level_divisions.Division_ID JOIN countries ON countries.Country_ID = first_level_divisions.Country_ID
         String sql = "INSERT INTO CUSTOMERS (Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES (?, ?, ?, ?, ?)" +
@@ -67,20 +66,19 @@ public class CustomerQuery {
         ps.setString(2, customerAddress);
         ps.setString(3, customerPostalCode);
         ps.setString(4, customerPhoneNumber);
-        //ps.setTimestamp(5, Timestamp.valueOf(createDate));
-        //ps.setTimestamp(6, lastUpdate);
         ps.setInt(5, customerDivision);
         ps.executeUpdate();
-//        if(rowsAffected > 0) {
-//            System.out.println("Insert successful");
-//        }
-//        else {
-//            System.out.println("Insert Failed!");
-//            return rowsAffected;
-//        }
     }
 
-
+    /**
+     * SQL Query to update an existing customer
+     * @param customerName
+     * @param customerAddress
+     * @param customerPostalCode
+     * @param customerPhone
+     * @param customerDivision
+     * @param customerId
+     */
     public static void updateCustomer(String customerName, String customerAddress, String customerPostalCode, String customerPhone, int customerDivision, int customerId) {
         try {
             String sql = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?,  Division_ID = ? WHERE Customer_ID = ?";
@@ -116,6 +114,10 @@ public class CustomerQuery {
         }
     }
 
+    /**
+     * SQL Query to delete a customer from the database
+     * @param customerId
+     */
     public static void deleteCustomer(int customerId) {
         try {
             String sql = "DELETE FROM customers WHERE Customer_ID = ?";

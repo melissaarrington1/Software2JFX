@@ -2,6 +2,9 @@ package sample.model;
 
 import java.time.LocalDateTime;
 
+/**
+ * Customer Model
+ */
 public class Customer {
     private int id;
     private String name;
@@ -28,92 +31,136 @@ public class Customer {
     public Customer(int customerIdSearch, String customerName) {
     }
 
+    /**
+     * Gets customer id
+     * @return
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Sets customer id
+     * @param id
+     */
     public void setId(int id) {
         this.id = id;
     }
-
+    /**
+     * Gets customer name
+     * @return
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets customer name
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Gets customer address
+     * @return
+     */
     public String getAddress() {
         return address;
     }
 
+    /**
+     * sets customer address
+     * @param address
+     */
     public void setAddress(String address) {
         this.address = address;
     }
 
+    /**
+     * gets customer phone number
+     * @return
+     */
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
+    /**
+     * sets customer phone number
+     * @param phoneNumber
+     */
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
+    /**
+     * gets customer postal code
+     * @return
+     */
     public String getPostalCode() {
         return postalCode;
     }
 
+    /**
+     * sets customer postal
+     * @param postalCode
+     */
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
 
+    /**
+     * gets customer country
+     * @return
+     */
     public String getCountries() {
         return countries;
     }
 
+    /**
+     * sets customer country
+     * @param countries
+     */
     public void setCountries(String countries) {
         this.countries = countries;
     }
 
+    /**
+     * gets customer division
+     * @return
+     */
     public String getDivision() {
         return division;
     }
 
+    /**
+     * sets customer division
+     * @param division
+     */
     public void setDivision(String division) {
         this.division = division;
     }
 
+    /**
+     * gets division id customer
+     * @return
+     */
     public int getDivisionID() {
         return divisionID;
     }
 
+    /**
+     * sets division id customer
+     * @param divisionID
+     */
     public void setDivisionID(int divisionID) {
         this.divisionID = divisionID;
     }
 
     /**
      * Returns a string representation of the object.
-     *
      * @return a string representation of the object.
-     * @apiNote In general, the
-     * {@code toString} method returns a string that
-     * "textually represents" this object. The result should
-     * be a concise but informative representation that is easy for a
-     * person to read.
-     * It is recommended that all subclasses override this method.
-     * The string output is not necessarily stable over time or across
-     * JVM invocations.
-     * @implSpec The {@code toString} method for class {@code Object}
-     * returns a string consisting of the name of the class of which the
-     * object is an instance, the at-sign character `{@code @}', and
-     * the unsigned hexadecimal representation of the hash code of the
-     * object. In other words, this method returns a string equal to the
-     * value of:
-     * <blockquote>
-     * <pre>
-     * getClass().getName() + '@' + Integer.toHexString(hashCode())
-     * </pre></blockquote>
      */
     @Override
     public String toString() {

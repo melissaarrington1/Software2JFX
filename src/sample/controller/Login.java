@@ -32,6 +32,7 @@ import static sample.DB.UserQuery.*;
 
 /**
  * Login Class
+ * @author Melissa Arrington
  */
 public class Login implements Initializable {
     @FXML

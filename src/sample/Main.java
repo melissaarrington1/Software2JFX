@@ -32,19 +32,8 @@ public class Main extends Application {
     public static void main(String[] args) throws SQLException {
         JDBC.makeConnection();
         launch(args);
-//        LocalDateTime cDate = LocalDateTime.now();
-//        Timestamp uDate = Timestamp.valueOf(LocalDateTime.now());
-//        int rowsAffected = CustomerQuery.insert("dad", "yankee", "33333", "4044444444", cDate, uDate, 12);
-//        if(rowsAffected > 0) {
-//            System.out.println("Insert successful");
-//        }
-//        else {
-//            System.out.println("Insert Failed!");
-//        }
+
         JDBC.closeConnection();
-//        ResourceBundle rb = ResourceBundle.getBundle("/resources/Nat", Locale.getDefault());
-//
-//        if(Locale.getDefault().getLanguage().equals("de") || Locale.getDefault().getLanguage().equals("es") || Locale.getDefault().getLanguage().equals("fr"))
-//            System.out.println(rb.getString("hello") + " " + rb.getString("world"));
+
     }
 }

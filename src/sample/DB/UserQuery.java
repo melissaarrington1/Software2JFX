@@ -9,6 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * SQL Queries for User
+ */
 public class UserQuery {
     /**
      * A method to get a list of all users from the database
@@ -60,6 +63,12 @@ public class UserQuery {
         return false;
     }
 
+    /**
+     * SQL Query for getting a user by id
+     * @param username
+     * @return
+     * @throws SQLException
+     */
     public static int getUserId(String username) throws SQLException {
         int userId = 0;
         String sqlStatement = "select User_ID, User_Name from users where User_Name = ?";

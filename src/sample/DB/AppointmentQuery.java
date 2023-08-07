@@ -11,6 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
+/**
+ * SQL Queries for Appointments
+ */
 public class AppointmentQuery {
 
     /**
@@ -44,6 +47,19 @@ public class AppointmentQuery {
         return appointmentList;
     }
 
+    /**
+     * SQL Query to add a new appointment
+     * @param appointmentTitle
+     * @param appointmentDescription
+     * @param appointmentType
+     * @param appointmentLocation
+     * @param contactId
+     * @param customerId
+     * @param userId
+     * @param appointmentStart
+     * @param appointmentEnd
+     * @throws SQLException
+     */
     public static void addAppointment(String appointmentTitle, String appointmentDescription, String appointmentType, String appointmentLocation, int contactId, int customerId, int userId, LocalDateTime appointmentStart, LocalDateTime appointmentEnd) throws SQLException{
         String sql = "INSERT INTO APPOINTMENTS (Title, Description, Type, Location, Contact_ID, Customer_ID, User_ID, Start, End) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)" +
                 "";
@@ -60,6 +76,20 @@ public class AppointmentQuery {
         ps.executeUpdate();
     }
 
+    /**
+     * SQL Query to update existing appointment
+     * @param appointmentId
+     * @param appointmentTitle
+     * @param appointmentDescription
+     * @param appointmentType
+     * @param appointmentLocation
+     * @param contactId
+     * @param customerId
+     * @param userId
+     * @param appointmentStart
+     * @param appointmentEnd
+     * @throws SQLException
+     */
     public static void updateAppointment(int appointmentId, String appointmentTitle, String appointmentDescription, String appointmentType, String appointmentLocation, int contactId, int customerId, int userId, LocalDateTime appointmentStart, LocalDateTime appointmentEnd) throws SQLException {
         try {
             String sql = "UPDATE appointments SET Title = ?, Description = ?, Type = ?, Location = ?, Contact_ID = ?, Customer_ID = ?, User_ID = ?, Start = ?, End = ? WHERE Appointment_ID =  ?" +
@@ -81,6 +111,11 @@ public class AppointmentQuery {
         }
     }
 
+    /**
+     * SQL Query to delete an appointment
+     * @param appointmentId
+     * @throws SQLException
+     */
     public static void deleteAppointment(int appointmentId) throws SQLException {
         try {
             String sql = "DELETE FROM appointments WHERE Appointment_ID = ?";
@@ -92,6 +127,11 @@ public class AppointmentQuery {
         }
     }
 
+    /**
+     * SQL Query for deleting an appointment from a customer deletion
+     * @param customerId
+     * @throws SQLException
+     */
     public static void deleteAppointmentByCustomer(int customerId) throws SQLException {
         try {
             String sql = "DELETE FROM appointments WHERE Customer_ID = ?";
@@ -103,7 +143,10 @@ public class AppointmentQuery {
         }
     }
 
-
+    /**
+     * SQL Query to filter appointments by week
+     * @return
+     */
         public static ObservableList<Appointment> getWeeklyAppointments() {
         ObservableList<Appointment> weekly = FXCollections.observableArrayList();
         try {
@@ -130,6 +173,10 @@ public class AppointmentQuery {
         return weekly;
     }
 
+    /**
+     * SQL Query to filter appointments by month
+     * @return
+     */
     public static ObservableList<Appointment> getMonthlyAppointments() {
         ObservableList<Appointment> monthly = FXCollections.observableArrayList();
         try {
@@ -189,6 +236,11 @@ public class AppointmentQuery {
         return userAppointments;
     }
 
+    /**
+     * SQL Query to get a Contact's appointment
+     * @param contactId
+     * @return
+     */
     public static ObservableList<Appointment> getContactAppointments(int contactId) {
         ObservableList<Appointment> contactAppointment = FXCollections.observableArrayList();
         try {

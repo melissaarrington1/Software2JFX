@@ -20,26 +20,50 @@ public class Division {
         this.countryId = countryId;
     }
 
+    /**
+     * gets a division id
+     * @return
+     */
     public int getDivisionId() {
         return divisionId;
     }
 
+    /**
+     * sets a division id
+     * @param divisionId
+     */
     public void setDivisionId(int divisionId) {
         this.divisionId = divisionId;
     }
 
+    /**
+     * gets division name
+     * @return
+     */
     public String getDivisionName() {
         return divisionName;
     }
 
+    /**
+     * sets division name
+     * @param divisionName
+     */
     public void setDivisionName(String divisionName) {
         this.divisionName = divisionName;
     }
 
+    /**
+     * gets country id
+     * @return
+     */
     public int getCountryId() {
         return countryId;
     }
 
+    /**
+     * sets country id
+     * @param countryId
+     */
     public void setCountryId(int countryId) {
         this.countryId = countryId;
     }

@@ -8,9 +8,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * SQL Queries for Reports
+ */
 public class ReportQuery {
-    //getMonthTypeReport
-
     /**
      * SQL query to get the type and total per month for reports
      * @return

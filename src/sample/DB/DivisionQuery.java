@@ -10,6 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.stream.Collectors;
 
+/**
+ * SQL Query for getting a list of Divisions
+ */
 public class DivisionQuery {
     public static ObservableList<Division> getDivisionList() {
         ObservableList<Division> divisionList = FXCollections.observableArrayList();
@@ -22,14 +25,8 @@ public class DivisionQuery {
                 int divisionId = rs.getInt("Division_ID");
                 int countryId = rs.getInt("Country_ID");
                 String divisionName = rs.getString("Division");
-//                LocalDateTime createDate = rs.getDate("Create_Date");
-//                String createdBy = rs.getString("Created_By");
-//                Timestamp lastUpdate = rs.getTimestamp("Last_Update");
-//                String lastUpdatedBy = rs.getString("Last_Updated_By");
-
                 Division d = new Division(divisionId, divisionName, countryId);
                 divisionList.add(d);
-                System.out.println("*");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -43,7 +40,7 @@ public class DivisionQuery {
     // do the same except reuse the method above Lambda expression
 
     /**
-     * Lambda Function for Associated country and Division by the country ID
+     * LAMBDA Function for getting Associated country and Division by the country ID
      * @param countryId
      * @return
      */
@@ -55,6 +52,11 @@ public class DivisionQuery {
 
     }
 
+    /**
+     * SQL Query for finding a division by country id
+     * @param divisionId
+     * @return
+     */
     public static Division findById(int divisionId) {
         for(Division d:getDivisionList()) {
             if(d.getDivisionId() == divisionId) {
@@ -64,6 +66,11 @@ public class DivisionQuery {
         return null;
     }
 
+    /**
+     * SQL Query for finding a country by division id
+     * @param divisionId
+     * @return
+     */
     public static Country findCountry(int divisionId) {
         for(Division d:getDivisionList()) {
             if(d.getDivisionId() == divisionId) {
