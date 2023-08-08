@@ -62,8 +62,8 @@ public class NewAppointmentController implements Initializable {
 
     /**
      * Button for Canceling without creating a new appointment.
-     * @param event
-     * @throws IOException
+     * @param event event
+     * @throws IOException exception
      */
     public void onActionCancel(ActionEvent event) throws IOException {
         System.out.println("create appointment button clicked");
@@ -75,8 +75,8 @@ public class NewAppointmentController implements Initializable {
 
     /**
      * Method for initializing the ComboBox lists with information for creating an appointment.
-     * @param url
-     * @param resourceBundle
+     * @param url url
+     * @param resourceBundle resource bundle
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -94,8 +94,8 @@ public class NewAppointmentController implements Initializable {
      * Calls method to check for an existing appointment.
      * Calls method to check for an overlapping appointment.
      * Included error handling if an appointment cannot be created.
-     * @param actionEvent
-     * @throws IOException
+     * @param actionEvent event
+     * @throws IOException exception
      */
     public void onActionSaveAppointment(ActionEvent actionEvent) throws IOException {
         try {

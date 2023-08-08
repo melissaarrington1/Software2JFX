@@ -59,8 +59,8 @@ public class AppointmentModifyController implements Initializable {
 
     /**
      * Initializes the fields with the existing appointment info
-     * @param url
-     * @param resourceBundle
+     * @param url url
+     * @param resourceBundle resource bundle
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -74,7 +74,7 @@ public class AppointmentModifyController implements Initializable {
     /**
      * Method to send info for an existing appointment to modify it.
      * Includes error handling to if update is not successful
-     * @param appointment
+     * @param appointment appointment
      */
     public void appointmentInfo(Appointment appointment) {
         try {
@@ -163,8 +163,8 @@ public class AppointmentModifyController implements Initializable {
 
     /**
      * Cancels without modifying an appointment, sends back to main Appointments screen
-     * @param actionEvent
-     * @throws IOException
+     * @param actionEvent actionevent
+     * @throws IOException exception
      */
     public void onActionCancel(ActionEvent actionEvent) throws IOException {
         stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();

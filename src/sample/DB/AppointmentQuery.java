@@ -49,16 +49,16 @@ public class AppointmentQuery {
 
     /**
      * SQL Query to add a new appointment
-     * @param appointmentTitle
-     * @param appointmentDescription
-     * @param appointmentType
-     * @param appointmentLocation
-     * @param contactId
-     * @param customerId
-     * @param userId
-     * @param appointmentStart
-     * @param appointmentEnd
-     * @throws SQLException
+     * @param appointmentTitle title
+     * @param appointmentDescription description
+     * @param appointmentType type
+     * @param appointmentLocation location
+     * @param contactId contact id
+     * @param customerId customer id
+     * @param userId user id
+     * @param appointmentStart appointment start
+     * @param appointmentEnd appointment end
+     * @throws SQLException exception
      */
     public static void addAppointment(String appointmentTitle, String appointmentDescription, String appointmentType, String appointmentLocation, int contactId, int customerId, int userId, LocalDateTime appointmentStart, LocalDateTime appointmentEnd) throws SQLException{
         String sql = "INSERT INTO APPOINTMENTS (Title, Description, Type, Location, Contact_ID, Customer_ID, User_ID, Start, End) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)" +
@@ -78,17 +78,17 @@ public class AppointmentQuery {
 
     /**
      * SQL Query to update existing appointment
-     * @param appointmentId
-     * @param appointmentTitle
-     * @param appointmentDescription
-     * @param appointmentType
-     * @param appointmentLocation
-     * @param contactId
-     * @param customerId
-     * @param userId
-     * @param appointmentStart
-     * @param appointmentEnd
-     * @throws SQLException
+     * @param appointmentId appointment id
+     * @param appointmentTitle appointment title
+     * @param appointmentDescription appointment decsription
+     * @param appointmentType appointment type
+     * @param appointmentLocation appointment location
+     * @param contactId contact id
+     * @param customerId customer id
+     * @param userId user id
+     * @param appointmentStart appointment start
+     * @param appointmentEnd appointment end
+     * @throws SQLException exception
      */
     public static void updateAppointment(int appointmentId, String appointmentTitle, String appointmentDescription, String appointmentType, String appointmentLocation, int contactId, int customerId, int userId, LocalDateTime appointmentStart, LocalDateTime appointmentEnd) throws SQLException {
         try {
@@ -113,8 +113,8 @@ public class AppointmentQuery {
 
     /**
      * SQL Query to delete an appointment
-     * @param appointmentId
-     * @throws SQLException
+     * @param appointmentId appointment id
+     * @throws SQLException exception
      */
     public static void deleteAppointment(int appointmentId) throws SQLException {
         try {
@@ -129,8 +129,8 @@ public class AppointmentQuery {
 
     /**
      * SQL Query for deleting an appointment from a customer deletion
-     * @param customerId
-     * @throws SQLException
+     * @param customerId customer id
+     * @throws SQLException exception
      */
     public static void deleteAppointmentByCustomer(int customerId) throws SQLException {
         try {
@@ -175,7 +175,7 @@ public class AppointmentQuery {
 
     /**
      * SQL Query to filter appointments by month
-     * @return
+     * @return Returns by Monthly appointments
      */
     public static ObservableList<Appointment> getMonthlyAppointments() {
         ObservableList<Appointment> monthly = FXCollections.observableArrayList();
@@ -205,7 +205,7 @@ public class AppointmentQuery {
 
     /**
      * SQL Query to get all appointments for users during login
-     * @param userId
+     * @param userId user id
      * @return userAppointments
      */
     public static ObservableList<Appointment> getUserAppointments(int userId) {
@@ -238,8 +238,8 @@ public class AppointmentQuery {
 
     /**
      * SQL Query to get a Contact's appointment
-     * @param contactId
-     * @return
+     * @param contactId Contact ID to filter the appointments
+     * @return Returns a list of appointments for the specified contact id
      */
     public static ObservableList<Appointment> getContactAppointments(int contactId) {
         ObservableList<Appointment> contactAppointment = FXCollections.observableArrayList();

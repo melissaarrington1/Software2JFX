@@ -14,7 +14,7 @@ public class User {
 
     /**
      * gets user id
-     * @return
+     * @return Returns user id
      */
     public int getUserId() {
         return userId;
@@ -22,7 +22,7 @@ public class User {
 
     /**
      * sets user id
-     * @param userId
+     * @param userId user id
      */
     public void setUserId(int userId) {
         this.userId = userId;
@@ -30,7 +30,7 @@ public class User {
 
     /**
      * get user name
-     * @return
+     * @return Returns username
      */
     public String getUserName() {
         return userName;
@@ -38,7 +38,7 @@ public class User {
 
     /**
      * sets user name
-     * @param userName
+     * @param userName username
      */
     public void setUserName(String userName) {
         this.userName = userName;

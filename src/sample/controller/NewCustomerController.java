@@ -59,8 +59,8 @@ public class NewCustomerController implements Initializable {
 
     /**
      *  Initialize method for setting combobox list of countries
-     * @param url
-     * @param resourceBundle
+     * @param url url
+     * @param resourceBundle resource bundle
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -69,8 +69,8 @@ public class NewCustomerController implements Initializable {
 
     /**
      * Method for Saving a new customer after entering all required fields
-     * @param event
-     * @throws IOException
+     * @param event event
+     * @throws IOException exception
      */
     public void onActionSaveCustomer(ActionEvent event) throws IOException {
         try {
@@ -121,7 +121,7 @@ public class NewCustomerController implements Initializable {
 
     /**
      * Method for selecting a customer's country using ComboBoxes
-     * @param actionEvent
+     * @param actionEvent event
      */
     public void onActionCountryChange(ActionEvent actionEvent) {
         Country country = customerCountryCombo.getValue();

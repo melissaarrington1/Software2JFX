@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 public class CustomerQuery {
     /**
      * SQL Query to Read a list of all customers from the database
-     * @return
+     * @return Returns a list of customers
      */
     public static ObservableList<Customer> getCustomerList() {
         ObservableList<Customer> customerList = FXCollections.observableArrayList();
@@ -49,13 +49,13 @@ public class CustomerQuery {
 
     /**
      * SQL Query to add a new customer.
-     * @param customerName
-     * @param customerAddress
-     * @param customerPostalCode
-     * @param customerPhoneNumber
-     * @param customerCountry
-     * @param customerDivision
-     * @throws SQLException
+     * @param customerName customer name
+     * @param customerAddress customer address
+     * @param customerPostalCode customer postal code
+     * @param customerPhoneNumber customer phone
+     * @param customerCountry customer country
+     * @param customerDivision customer division
+     * @throws SQLException SQL exception for errors
      */
     public static void addCustomer(String customerName, String customerAddress, String customerPostalCode, String customerPhoneNumber, Country customerCountry, int customerDivision) throws SQLException {
 //JOIN first_level_divisions ON customers.Division_ID = first_level_divisions.Division_ID JOIN countries ON countries.Country_ID = first_level_divisions.Country_ID
@@ -72,12 +72,12 @@ public class CustomerQuery {
 
     /**
      * SQL Query to update an existing customer
-     * @param customerName
-     * @param customerAddress
-     * @param customerPostalCode
-     * @param customerPhone
-     * @param customerDivision
-     * @param customerId
+     * @param customerName name
+     * @param customerAddress address
+     * @param customerPostalCode postal code
+     * @param customerPhone phone
+     * @param customerDivision division
+     * @param customerId id
      */
     public static void updateCustomer(String customerName, String customerAddress, String customerPostalCode, String customerPhone, int customerDivision, int customerId) {
         try {
@@ -116,7 +116,7 @@ public class CustomerQuery {
 
     /**
      * SQL Query to delete a customer from the database
-     * @param customerId
+     * @param customerId id
      */
     public static void deleteCustomer(int customerId) {
         try {

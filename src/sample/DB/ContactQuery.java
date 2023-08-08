@@ -60,9 +60,9 @@ public class ContactQuery {
 
     /**
      *  SQL Query to get the Contact ID for a selected Contact Name
-     * @param contactName
-     * @return
-     * @throws SQLException
+     * @param contactName name
+     * @return Returns contact id
+     * @throws SQLException exception
      */
     public static int getContactId(String contactName) throws SQLException {
         int contactId = 0;

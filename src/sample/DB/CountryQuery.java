@@ -36,8 +36,8 @@ public class CountryQuery {
 
     /**
      * Finding a country by ID
-     * @param countryId
-     * @return
+     * @param countryId country id
+     * @return Returns country id
      */
     public static Country findById(int countryId) {
         for(Country c:getCountryList()) {

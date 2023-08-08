@@ -63,8 +63,8 @@ public class Login implements Initializable {
     /**
      * Method that sets initial login info.
      * Will change language from English to French, depending on the locale of the user
-     * @param url
-     * @param rb
+     * @param url url
+     * @param rb resource bundle
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -91,9 +91,9 @@ public class Login implements Initializable {
     /**
      * Method for button that logs into application.
      * Includes validation for username/password.
-     * @param event
-     * @throws IOException
-     * @throws SQLException
+     * @param event event
+     * @throws IOException exception
+     * @throws SQLException exception
      */
     public void onActionLoginBtn(ActionEvent event) throws IOException, SQLException {
         String username = usernameField.getText();
@@ -156,13 +156,14 @@ public class Login implements Initializable {
     /**
      * Method for recording the dates/times that each user tries to log in.
      * Record is user was successful or unsuccessful in logging in.
-     * @throws IOException
+     * @throws IOException exception
      */
     public void recordLogin(boolean loginSuccess) throws IOException {
-        LocalDateTime currentTime = LocalDateTime.now();
+        ZonedDateTime currentTime = ZonedDateTime.now().withZoneSameInstant(ZoneId.of("UTC"));
+
         //boolean loginSuccess = false;
         FileWriter f = new FileWriter("login_activity.txt", true);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyy hh:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss");
         ZoneId zone = ZoneId.systemDefault();
 
         if(loginSuccess) {
@@ -172,13 +173,13 @@ public class Login implements Initializable {
         else {
             f.write(usernameField.getText() + " attempted to login but failed on " + formatter.format(currentTime) + "\n");
         }
-        f.write("\n");
+        //f.write("\n");
         f.close();
     }
 
     /**
      * Method for exiting applications
-     * @param actionEvent
+     * @param actionEvent event
      */
     public void onActionExit(ActionEvent actionEvent) {
         System.out.println("exit clicked");

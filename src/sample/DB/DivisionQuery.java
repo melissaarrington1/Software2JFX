@@ -40,9 +40,10 @@ public class DivisionQuery {
     // do the same except reuse the method above Lambda expression
 
     /**
-     * LAMBDA Function for getting Associated country and Division by the country ID
-     * @param countryId
-     * @return
+     * Method returns a list of all divisions for a selected country
+     * LAMBDA Function #2 for getting Associated country and Division by the country ID
+     * @param countryId id
+     * @return Returns division list
      */
     public static ObservableList<Division> getCountryDivisions(int countryId) {
         ObservableList<Division> divisionList = getDivisionList().stream()
@@ -54,8 +55,8 @@ public class DivisionQuery {
 
     /**
      * SQL Query for finding a division by country id
-     * @param divisionId
-     * @return
+     * @param divisionId id
+     * @return Returns d
      */
     public static Division findById(int divisionId) {
         for(Division d:getDivisionList()) {
@@ -68,8 +69,8 @@ public class DivisionQuery {
 
     /**
      * SQL Query for finding a country by division id
-     * @param divisionId
-     * @return
+     * @param divisionId division id
+     * @return Returns country by id
      */
     public static Country findCountry(int divisionId) {
         for(Division d:getDivisionList()) {

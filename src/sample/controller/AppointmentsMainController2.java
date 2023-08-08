@@ -152,8 +152,8 @@ public class AppointmentsMainController2 implements Initializable {
 
     /**
      * Initializes each screen of the application with the appointment, customer, or report data.
-     * @param url
-     * @param resourceBundle
+     * @param url url
+     * @param resourceBundle resource bundle
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -211,8 +211,8 @@ public class AppointmentsMainController2 implements Initializable {
 
     /**
      * Method for the Reports Tab, that includes appointment data for each user
-     * @param actionEvent
-     * @throws SQLException
+     * @param actionEvent action event
+     * @throws SQLException sql exception
      */
     public void contactAppointmentTable(ActionEvent actionEvent) throws SQLException {
         //takes in a CONTACT name and converts to contact id to ge all their appointments
@@ -233,8 +233,8 @@ public class AppointmentsMainController2 implements Initializable {
     /**
      * Method for deleting an existing appointment.
      * Includes validation for deleting or not deleting an appointment
-     * @param actionEvent
-     * @throws SQLException
+     * @param actionEvent action event
+     * @throws SQLException sql exception
      */
     public void onActionDeleteAppointment(ActionEvent actionEvent) throws SQLException {
         ObservableList<Appointment> appointmentList = AppointmentQuery.getAppointmentList();
@@ -270,7 +270,7 @@ public class AppointmentsMainController2 implements Initializable {
 
     /**
      * Method for filtering all appointments by week
-     * @param actionEvent
+     * @param actionEvent action event
      */
     public void onActionFilterByWeek(ActionEvent actionEvent) {
         if(filterByWeek.isSelected()) {
@@ -289,7 +289,7 @@ public class AppointmentsMainController2 implements Initializable {
 
     /**
      * Method for filtering all appointments by month
-     * @param actionEvent
+     * @param actionEvent action event
      */
     public void onActionFilterByMonth(ActionEvent actionEvent) {
         mainAppointmentsTable.setItems(AppointmentQuery.getMonthlyAppointments());
@@ -299,7 +299,7 @@ public class AppointmentsMainController2 implements Initializable {
 
     /**
      * Method to reset filtering
-     * @param actionEvent
+     * @param actionEvent action event
      */
     public void onActionFilterAll(ActionEvent actionEvent) {
         mainAppointmentsTable.setItems(AppointmentQuery.getAppointmentList());
@@ -309,8 +309,8 @@ public class AppointmentsMainController2 implements Initializable {
     /**
      * Button for Modifying Customers. Redirects to the CustomerModify page when clicked.
      * If there is no customer selected, a Warning Error will occur.
-     * @param event
-     * @throws IOException
+     * @param event event
+     * @throws IOException exception
      */
     public void onActionModifyCustomer(ActionEvent event) throws SQLException, IOException {
 
@@ -343,8 +343,8 @@ public class AppointmentsMainController2 implements Initializable {
     /***
      * Event that takes you to the Add Customer screen.
      *
-     * @param event
-     * @throws IOException
+     * @param event event
+     * @throws IOException exception
      */
     public void onActionCreateCustomer(ActionEvent event) throws IOException {
         System.out.println("lets create a new customer button clicked");
@@ -358,8 +358,8 @@ public class AppointmentsMainController2 implements Initializable {
     /**
      * Method to delete a customer.
      * Will delete existing appointment for a customer if a customer is deleted.
-     * @param actionEvent
-     * @throws SQLException
+     * @param actionEvent event
+     * @throws SQLException exception
      */
     public void onActionDeleteCustomer(ActionEvent actionEvent) throws SQLException {
         ObservableList<Customer> customerList = CustomerQuery.getCustomerList();
@@ -434,8 +434,8 @@ public class AppointmentsMainController2 implements Initializable {
 
     /**
      * Method for logging out of application. Sends you back to the login screen.
-     * @param event
-     * @throws IOException
+     * @param event event
+     * @throws IOException exception
      */
     public void onActionLogOut(ActionEvent event) throws IOException {
         System.out.println("logging out");
@@ -453,8 +453,8 @@ public class AppointmentsMainController2 implements Initializable {
 
     /**
      * Method for going back to the main appointments screen
-     * @param event
-     * @throws IOException
+     * @param event event
+     * @throws IOException exception
      */
     public void backToAppointments(ActionEvent event) throws IOException {
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();

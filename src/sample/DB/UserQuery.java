@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class UserQuery {
     /**
      * A method to get a list of all users from the database
-     * @return
+     * @return Returns a user list
      */
     public static ObservableList<User> getUserList() {
         ObservableList<User> userList = FXCollections.observableArrayList();
@@ -40,10 +40,10 @@ public class UserQuery {
 
     /**
      * SQL Query for getting a users login info
-     * @param username
-     * @param password
-     * @return
-     * @throws SQLException
+     * @param username username
+     * @param password password
+     * @return Returns user login
+     * @throws SQLException exception
      */
     public static boolean userLogin(String username, String password) throws SQLException {
         try {
@@ -65,9 +65,9 @@ public class UserQuery {
 
     /**
      * SQL Query for getting a user by id
-     * @param username
-     * @return
-     * @throws SQLException
+     * @param username username
+     * @return Returns a user id
+     * @throws SQLException exception
      */
     public static int getUserId(String username) throws SQLException {
         int userId = 0;

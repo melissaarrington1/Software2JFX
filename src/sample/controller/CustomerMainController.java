@@ -52,8 +52,8 @@ public class CustomerMainController implements Initializable {
     /**
      * Button for Modifying Customers. Redirects to the CustomerModify page when clicked.
      * If there is no customer selected, a Warning Error will occur.
-     * @param event
-     * @throws IOException
+     * @param event event
+     * @throws IOException exception
      */
     public void onActionModifyCustomer(ActionEvent event) throws SQLException, IOException {
 
@@ -86,8 +86,8 @@ public class CustomerMainController implements Initializable {
     /***
      * Event that takes you to the Add Customer screen.
      *
-     * @param event
-     * @throws IOException
+     * @param event event
+     * @throws IOException exception
      */
     public void onActionCreateCustomer(ActionEvent event) throws IOException {
         System.out.println("lets create a new customer button clicked");
@@ -161,8 +161,8 @@ public class CustomerMainController implements Initializable {
 
     /**
      *  Method to Initialize the list of customers on the main customer screen
-     * @param url
-     * @param resourceBundle
+     * @param url url
+     * @param resourceBundle resource bundle
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

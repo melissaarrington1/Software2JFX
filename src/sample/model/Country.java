@@ -18,7 +18,7 @@ public class Country {
 
     /**
      * Getter for Country
-     * @return
+     * @return Returns country id
      */
     public int getCountryId() {
         return countryId;
@@ -26,7 +26,7 @@ public class Country {
 
     /**
      * Setter for Country
-     * @param countryId
+     * @param countryId country id
      */
     public void setCountryId(int countryId) {
         this.countryId = countryId;

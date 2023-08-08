@@ -52,8 +52,8 @@ public class CustomerModifyController implements Initializable {
 
     /**
      * Method used to Initialize the list of countries
-     * @param url
-     * @param resourceBundle
+     * @param url url
+     * @param resourceBundle resource bundle
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -64,8 +64,8 @@ public class CustomerModifyController implements Initializable {
 
     /**
      * Method for canceling without modifying customer
-     * @param event
-     * @throws IOException
+     * @param event event
+     * @throws IOException exception
      */
     public void onActionCancel(ActionEvent event) throws IOException {
         System.out.println("cancel modifying customer button clicked");
@@ -78,7 +78,7 @@ public class CustomerModifyController implements Initializable {
     /**
      * Method that takes in all of the updated customer info and saves it.
      * Includes error handling if updating a customer is not successful.
-     * @param event
+     * @param event event
      */
     public void onActionSaveCustomer(ActionEvent event) {
         try {
@@ -106,7 +106,7 @@ public class CustomerModifyController implements Initializable {
 
     /**
      * Method that loads an existing customer country and can update the country
-     * @param actionEvent
+     * @param actionEvent event
      */
     public void onActionCountryChange(ActionEvent actionEvent) {
         Country C = customerCountryCombo.getValue();
@@ -115,8 +115,8 @@ public class CustomerModifyController implements Initializable {
 
     /**
      * Method for sending customer info over to the Modify customer screen.
-     * @param customer
-     * @throws SQLException
+     * @param customer customer
+     * @throws SQLException exception
      */
     public void customerInfo(Customer customer) throws SQLException {
         try{

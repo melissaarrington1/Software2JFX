@@ -14,7 +14,7 @@ import java.sql.SQLException;
 public class ReportQuery {
     /**
      * SQL query to get the type and total per month for reports
-     * @return
+     * @return Returns an appointment total by month
      */
     public static ObservableList<ReportItem> getAppointmentTypeMonthReport() {
         ObservableList<ReportItem> appointmentTypeMonth = FXCollections.observableArrayList();
@@ -44,7 +44,7 @@ public class ReportQuery {
 
     /**
      * SQL Query for getting list of each country and the total amount of appointments for each country
-     * @return
+     * @return Returns a country total in reports
      */
     public static ObservableList<ReportItem> getCountryTotalReport() {
         ObservableList<ReportItem> list = FXCollections.observableArrayList();

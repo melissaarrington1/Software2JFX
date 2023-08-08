@@ -33,7 +33,7 @@ public class Customer {
 
     /**
      * Gets customer id
-     * @return
+     * @return Returns id
      */
     public int getId() {
         return id;
@@ -41,14 +41,14 @@ public class Customer {
 
     /**
      * Sets customer id
-     * @param id
+     * @param id id
      */
     public void setId(int id) {
         this.id = id;
     }
     /**
      * Gets customer name
-     * @return
+     * @return Returns name
      */
     public String getName() {
         return name;
@@ -56,7 +56,7 @@ public class Customer {
 
     /**
      * Sets customer name
-     * @param name
+     * @param name name
      */
     public void setName(String name) {
         this.name = name;
@@ -64,7 +64,7 @@ public class Customer {
 
     /**
      * Gets customer address
-     * @return
+     * @return Returns address
      */
     public String getAddress() {
         return address;
@@ -72,7 +72,7 @@ public class Customer {
 
     /**
      * sets customer address
-     * @param address
+     * @param address address
      */
     public void setAddress(String address) {
         this.address = address;
@@ -80,7 +80,7 @@ public class Customer {
 
     /**
      * gets customer phone number
-     * @return
+     * @return Returns phone number
      */
     public String getPhoneNumber() {
         return phoneNumber;
@@ -88,7 +88,7 @@ public class Customer {
 
     /**
      * sets customer phone number
-     * @param phoneNumber
+     * @param phoneNumber phone number
      */
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
@@ -96,7 +96,7 @@ public class Customer {
 
     /**
      * gets customer postal code
-     * @return
+     * @return Returns postal code
      */
     public String getPostalCode() {
         return postalCode;
@@ -104,7 +104,7 @@ public class Customer {
 
     /**
      * sets customer postal
-     * @param postalCode
+     * @param postalCode postal code
      */
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
@@ -112,7 +112,7 @@ public class Customer {
 
     /**
      * gets customer country
-     * @return
+     * @return Returns country list
      */
     public String getCountries() {
         return countries;
@@ -120,7 +120,7 @@ public class Customer {
 
     /**
      * sets customer country
-     * @param countries
+     * @param countries country
      */
     public void setCountries(String countries) {
         this.countries = countries;
@@ -128,7 +128,7 @@ public class Customer {
 
     /**
      * gets customer division
-     * @return
+     * @return Returns a division
      */
     public String getDivision() {
         return division;
@@ -136,7 +136,7 @@ public class Customer {
 
     /**
      * sets customer division
-     * @param division
+     * @param division division
      */
     public void setDivision(String division) {
         this.division = division;
@@ -144,7 +144,7 @@ public class Customer {
 
     /**
      * gets division id customer
-     * @return
+     * @return Returns division id
      */
     public int getDivisionID() {
         return divisionID;
@@ -152,7 +152,7 @@ public class Customer {
 
     /**
      * sets division id customer
-     * @param divisionID
+     * @param divisionID division id
      */
     public void setDivisionID(int divisionID) {
         this.divisionID = divisionID;

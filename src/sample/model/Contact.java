@@ -10,7 +10,7 @@ public class Contact {
 
     /**
      * Getter for Contact ID
-     * @return
+     * @return Returns contact id
      */
     public int getContactId() {
         return contactId;

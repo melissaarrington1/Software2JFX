@@ -25,16 +25,16 @@ public class Appointment {
 
     /**
      * Appointments constructor
-     * @param appointmentId
-     * @param appointmentTitle
-     * @param appointmentDescription
-     * @param appointmentType
-     * @param appointmentLocation
-     * @param appointmentContact
-     * @param customerId
-     * @param userId
-     * @param appointmentStart
-     * @param appointmentEnd
+     * @param appointmentId id
+     * @param appointmentTitle title
+     * @param appointmentDescription description
+     * @param appointmentType type
+     * @param appointmentLocation location
+     * @param appointmentContact contact
+     * @param customerId customer id
+     * @param userId user id
+     * @param appointmentStart appointment start
+     * @param appointmentEnd appointment end
      */
     public Appointment(int appointmentId, String appointmentTitle, String appointmentDescription, String appointmentType, String appointmentLocation, int appointmentContact, int customerId, int userId, LocalDateTime appointmentStart, LocalDateTime appointmentEnd) {
         this.appointmentId = appointmentId;
@@ -54,7 +54,7 @@ public class Appointment {
 
     /**
      * AppointmentID Getter
-     * @return
+     * @return Returns appointment id
      */
     public int getAppointmentId() {
         return appointmentId;
@@ -68,7 +68,7 @@ public class Appointment {
     }
     /**
      * Appointment Title Getter
-     * @return
+     * @return Returns appointment title
      */
     public String getAppointmentTitle() {
         return appointmentTitle;
@@ -81,7 +81,7 @@ public class Appointment {
     }
     /**
      * Appointment Description Getter
-     * @return
+     * @return Returns appointment description
      */
     public String getAppointmentDescription() {
         return appointmentDescription;
@@ -95,7 +95,7 @@ public class Appointment {
 
     /**
      * Appointment Type Getter
-     * @return
+     * @return Returns appointment type
      */
     public String getAppointmentType() {
         return appointmentType;
@@ -108,7 +108,7 @@ public class Appointment {
     }
     /**
      * Appointment Location Getter
-     * @return
+     * @return Returns appointment location
      */
     public String getAppointmentLocation() {
         return appointmentLocation;
@@ -122,7 +122,7 @@ public class Appointment {
 
     /**
      * Appointment Contact Getter
-     * @return
+     * @return Returns appointment contact
      */
     public int getAppointmentContact() {
         return appointmentContact;
@@ -135,7 +135,7 @@ public class Appointment {
     }
     /**
      * Appointment Customer ID Getter
-     * @return
+     * @return Returns appointment customer id
      */
     public int getCustomerId() {
         return customerId;
@@ -148,7 +148,7 @@ public class Appointment {
     }
     /**
      * Appointment User ID Getter
-     * @return
+     * @return Returns appointment user id
      */
     public int getUserId() {
         return userId;
@@ -161,7 +161,7 @@ public class Appointment {
     }
     /**
      * Appointment Start Time Getter
-     * @return
+     * @return Returns appointment start
      */
     public LocalDateTime getAppointmentStart() {
         return appointmentStart;
@@ -174,7 +174,7 @@ public class Appointment {
     }
     /**
      * Appointment End Time Getter
-     * @return
+     * @return Returns appointment end
      */
     public LocalDateTime getAppointmentEnd() {
         return appointmentEnd;
@@ -188,19 +188,17 @@ public class Appointment {
 
     /**
      * Method for checking for overlap when creating a new appointment
-     * @param appointmentId
-     * @param customerId
-     * @param start
-     * @param end
-     * @return
+     * Lambda Function #1 for filtering through customer appointments by Id
+     * @param appointmentId id
+     * @param customerId id
+     * @param start start
+     * @param end end
+     * @return Returns true or false for overlap information
      */
     public static boolean checkOverlapAppt(int appointmentId, int customerId, LocalDateTime start, LocalDateTime end) {
         ObservableList<Appointment> appointments = AppointmentQuery.getAppointmentList();
         ObservableList<Appointment> customerAppointments = FXCollections.observableArrayList();
 
-        /**
-         * Lambda Function for filtering through customer appointments by Id
-         */
         customerAppointments = appointments.filtered(apt -> {
             if(apt.getCustomerId() == customerId && apt.getAppointmentId() != appointmentId) {
                 return true;
