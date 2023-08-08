@@ -177,7 +177,7 @@ public class NewAppointmentController implements Initializable {
                 return;
             }
 
-            AppointmentQuery.addAppointment(appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, contactId, customerId, userId, start, end);
+            AppointmentQuery.addAppointment(appointmentTitle, appointmentDescription, appointmentType, appointmentLocation, contactId, customerId, userId, start, end);
 
         }
         catch(NullPointerException | SQLException e) {

@@ -91,12 +91,12 @@ public class AppointmentModifyController implements Initializable {
                 }
             }
             for(Customer cust: appointmentCustCombo.getItems()) {
-                if(selectedAppointment.getAppointmentContact() == cust.getId()) {
+                if(selectedAppointment.getCustomerId() == cust.getId()) {
                     appointmentCustCombo.setValue(cust);
                 }
             }
             for(User u: appointmentUserCombo.getItems()) {
-                if(selectedAppointment.getAppointmentContact() == u.getUserId()) {
+                if(selectedAppointment.getUserId() == u.getUserId()) {
                     appointmentUserCombo.setValue(u);
                 }
             }

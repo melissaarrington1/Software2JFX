@@ -232,7 +232,7 @@ public class AppointmentsMainController2 implements Initializable {
 
     /**
      * Method for deleting an existing appointment.
-     * Includes validation for deleting or not deleting an appointnent
+     * Includes validation for deleting or not deleting an appointment
      * @param actionEvent
      * @throws SQLException
      */
@@ -240,16 +240,29 @@ public class AppointmentsMainController2 implements Initializable {
         ObservableList<Appointment> appointmentList = AppointmentQuery.getAppointmentList();
         Appointment appointment = mainAppointmentsTable.getSelectionModel().getSelectedItem();
         if(appointment == null) {
-            Alert deleteAlert = new Alert(Alert.AlertType.ERROR, "Please select an appointment to delete!");
-            deleteAlert.show();
+            Alert notDeletedAlert = new Alert(Alert.AlertType.ERROR, "Please select an appointment to delete!");
+            notDeletedAlert.show();
             return;
         }
         else {
-            Alert deleteAppointment = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this appointment?");
-            Optional<ButtonType> result = deleteAppointment.showAndWait();
 
-            if (result.isPresent() && result.get() == ButtonType.OK) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete appointment ID: " + mainAppointmentsTable.getSelectionModel().getSelectedItem().getAppointmentId() + "?");
+            alert.getButtonTypes().clear();
+            alert.getButtonTypes().addAll(ButtonType.CANCEL, ButtonType.OK);
+            alert.showAndWait();
+
+            if(alert.getResult() == ButtonType.OK) {
+                Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+                confirmation.setContentText("Appointment ID: " + mainAppointmentsTable.getSelectionModel().getSelectedItem().getAppointmentId() + " of Type: "
+                        + mainAppointmentsTable.getSelectionModel().getSelectedItem().getAppointmentType() + " has been deleted.");
+                confirmation.getButtonTypes().clear();
+                confirmation.getButtonTypes().addAll(ButtonType.OK);
+                confirmation.showAndWait();
+
                 AppointmentQuery.deleteAppointment(mainAppointmentsTable.getSelectionModel().getSelectedItem().getAppointmentId());
+                appointmentList = AppointmentQuery.getAppointmentList();
+                mainAppointmentsTable.setItems(appointmentList);
+                mainAppointmentsTable.refresh();
             }
 
         }

@@ -161,16 +161,16 @@ public class Login implements Initializable {
     public void recordLogin(boolean loginSuccess) throws IOException {
         LocalDateTime currentTime = LocalDateTime.now();
         //boolean loginSuccess = false;
-        FileWriter f = new FileWriter("loginActivity.txt", true);
+        FileWriter f = new FileWriter("login_activity.txt", true);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyy hh:mm:ss");
         ZoneId zone = ZoneId.systemDefault();
 
         if(loginSuccess) {
-            f.write(usernameField.getText() + "has logged in on " + formatter.format(currentTime) + "\n");
+            f.write(usernameField.getText() + " has logged in on " + formatter.format(currentTime) + "\n");
             //return "logins.text";
         }
         else {
-            f.write(usernameField.getText() + "attempted to login but failed on " + formatter.format(currentTime) + "\n");
+            f.write(usernameField.getText() + " attempted to login but failed on " + formatter.format(currentTime) + "\n");
         }
         f.write("\n");
         f.close();
